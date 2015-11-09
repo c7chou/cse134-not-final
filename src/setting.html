@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Setting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/setting.css">
+    <script src="../js/setting.js"></script>
+</head>
+<body>
+	<section>
+		<h1>Notification Setting</h1>
+		<ul id="setting-list">
+        	<li>
+				<ul class="setting-info">
+            		<li><div class="setting-name">Sleep 8 hours</div></li>
+				</ul>
+				<ul class="notification">
+					<li><div class="notification-type">Turn Off</div><hr></li>						
+					<li><div class="notification-type">Pause</div><hr></li>
+					<li><div class="notification-type">Sleep</div></li>
+				</ul>				
+				<div class="onoff">
+					<span class="switches">
+						<div class="onoffswitch">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-1" name="turnoff">
+							<label class="onoffswitch-label"  for="turnoff-1"></label>
+						</div>
+					</span>
+					<span class="switches">
+					<div class="onoffswitch">
+						<input type="checkbox" class="onoffswitch-checkbox" id="pause-1" name="pause">
+						<label class="onoffswitch-label" for="pause-1"></label>
+					</div>
+					</span>
+										
+					<span class="switches">
+					<div class="onoffswitch">
+						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-1" name="sleep">
+						<label class="onoffswitch-label" for="sleep-1"></label>
+					</div>
+					</span>
+				</div>
+				
+         	</li>
+			
+			
+			<li> 
+				<ul class="setting-info">
+            		<li><div class="setting-name">Eat Healthy</div></li>
+				</ul>
+				<ul class="notification">
+					<li><div class="notification-type">Turn Off</div><hr></li>						
+					<li><div class="notification-type">Pause</div><hr></li>
+					<li><div class="notification-type">Sleep</div></li>
+				</ul>				
+				<div class="onoff">
+					<span class="switches">
+						<div class="onoffswitch">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-2" name="turnoff">
+							<label class="onoffswitch-label" for="turnoff-2"></label>
+						</div>
+					</span>
+					<span class="switches">
+					<div class="onoffswitch">
+						<input type="checkbox" class="onoffswitch-checkbox" id="pause-2" name="pause">
+						<label class="onoffswitch-label" for="pause-2"></label>
+					</div>
+					</span>
+										
+					<span class="switches">
+					<div class="onoffswitch">
+						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-2" name="sleep">
+						<label class="onoffswitch-label" for="sleep-2"></label>
+					</div>
+					</span>
+				</div>
+				
+			</li>
+			
+			
+			
+			<li> 
+				<ul class="setting-info">
+            		<li><div class="setting-name">Exercise 30 minutes</div></li>
+				</ul>
+				<ul class="notification">
+					<li><div class="notification-type">Turn Off</div><hr></li>						
+					<li><div class="notification-type">Pause</div><hr></li>
+					<li><div class="notification-type">Sleep</div></li>
+				</ul>				
+				<div class="onoff">
+					<span class="switches">
+						<div class="onoffswitch">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-3" name="turnoff">
+							<label class="onoffswitch-label" for="turnoff-3"></label>
+						</div>
+					</span>
+					<span class="switches">
+					<div class="onoffswitch">
+						<input type="checkbox" class="onoffswitch-checkbox" id="pause-3" name="pause">
+						<label class="onoffswitch-label" for="pause-3"></label>
+					</div>
+					</span>
+										
+					<span class="switches">
+					<div class="onoffswitch">
+						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-3" name="sleep">
+						<label class="onoffswitch-label" for="sleep-3"></label>
+					</div>
+					</span>
+				</div>
+				
+			</li>
+			
+			<li> 
+				<ul class="setting-info">
+            		<li><div class="setting-name">ALL</div></li>
+				</ul>
+				<ul class="notification">
+					<li><div class="notification-type">Turn Off</div><hr></li>						
+					<li><div class="notification-type">Pause</div><hr></li>
+					<li><div class="notification-type">Sleep</div></li>
+				</ul>				
+				<div class="onoff">
+					<span class="switches">
+						<div class="onoffswitch">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnOffAll" onclick="toggleTurnOff(this)" >
+							<label class="onoffswitch-label" for="turnOffAll"> </label>
+						</div>
+					</span>
+					<span class="switches">
+						<div class="onoffswitch">
+							<input type="checkbox" class="onoffswitch-checkbox" id="pauseAll" onclick="togglePause(this)">
+							<label class="onoffswitch-label" for="pauseAll"></label>
+						</div>
+					</span>
+										
+					<span class="switches">
+						<div class="onoffswitch" >
+							<input type="checkbox" class="onoffswitch-checkbox" id="sleep3" onclick="toggleSleep(this)">
+							<label class="onoffswitch-label" for="sleep3"></label>
+						</div>
+					</span>
+				</div>
+				
+			</li>
+		</ul>
+	</section>
+	
+
+
+</body>
+</html>
