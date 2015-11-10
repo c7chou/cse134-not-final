@@ -23,20 +23,20 @@
 				<div class="onoff">
 					<span class="switches">
 						<div class="onoffswitch">
-							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-1" name="turnoff">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-1" name="turnoff" onchange="checkAllTurnOff()">
 							<label class="onoffswitch-label"  for="turnoff-1"></label>
 						</div>
 					</span>
 					<span class="switches">
 					<div class="onoffswitch">
-						<input type="checkbox" class="onoffswitch-checkbox" id="pause-1" name="pause">
+						<input type="checkbox" class="onoffswitch-checkbox" id="pause-1" name="pause" onchange="checkAllPause()">
 						<label class="onoffswitch-label" for="pause-1"></label>
 					</div>
 					</span>
 										
 					<span class="switches">
 					<div class="onoffswitch">
-						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-1" name="sleep">
+						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-1" name="sleep" onchange="checkAllSleep()">
 						<label class="onoffswitch-label" for="sleep-1"></label>
 					</div>
 					</span>
@@ -57,20 +57,20 @@
 				<div class="onoff">
 					<span class="switches">
 						<div class="onoffswitch">
-							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-2" name="turnoff">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-2" name="turnoff" onchange="checkAllTurnOff()">
 							<label class="onoffswitch-label" for="turnoff-2"></label>
 						</div>
 					</span>
 					<span class="switches">
 					<div class="onoffswitch">
-						<input type="checkbox" class="onoffswitch-checkbox" id="pause-2" name="pause">
+						<input type="checkbox" class="onoffswitch-checkbox" id="pause-2" name="pause" onchange="checkAllPause()">
 						<label class="onoffswitch-label" for="pause-2"></label>
 					</div>
 					</span>
 										
 					<span class="switches">
 					<div class="onoffswitch">
-						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-2" name="sleep">
+						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-2" name="sleep" onchange="checkAllSleep()">
 						<label class="onoffswitch-label" for="sleep-2"></label>
 					</div>
 					</span>
@@ -92,20 +92,20 @@
 				<div class="onoff">
 					<span class="switches">
 						<div class="onoffswitch">
-							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-3" name="turnoff">
+							<input type="checkbox" class="onoffswitch-checkbox" id="turnoff-3" name="turnoff" onchange="checkAllTurnOff()">
 							<label class="onoffswitch-label" for="turnoff-3"></label>
 						</div>
 					</span>
 					<span class="switches">
 					<div class="onoffswitch">
-						<input type="checkbox" class="onoffswitch-checkbox" id="pause-3" name="pause">
+						<input type="checkbox" class="onoffswitch-checkbox" id="pause-3" name="pause" onchange="checkAllPause()">
 						<label class="onoffswitch-label" for="pause-3"></label>
 					</div>
 					</span>
 										
 					<span class="switches">
 					<div class="onoffswitch">
-						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-3" name="sleep">
+						<input type="checkbox" class="onoffswitch-checkbox" id="sleep-3" name="sleep" onchange="checkAllSleep()">
 						<label class="onoffswitch-label" for="sleep-3"></label>
 					</div>
 					</span>
@@ -138,8 +138,8 @@
 										
 					<span class="switches">
 						<div class="onoffswitch" >
-							<input type="checkbox" class="onoffswitch-checkbox" id="sleep3" onclick="toggleSleep(this)">
-							<label class="onoffswitch-label" for="sleep3"></label>
+							<input type="checkbox" class="onoffswitch-checkbox" id="sleepAll" onclick="toggleSleep(this)">
+							<label class="onoffswitch-label" for="sleepAll"></label>
 						</div>
 					</span>
 				</div>
