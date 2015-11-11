@@ -97,9 +97,11 @@
                 </div>
             </li>
             -->
-        </ul>     
+        </ul>
     </section>
     <a href="setting.html">Settings</a>
+
+    <button type="button" id="notification" title="view notification">!</button>
 
     <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
     
@@ -125,7 +127,7 @@
                               
             parent.removeChild(child);
             
-            //alert(parent.nodeName);    
+            //alert(parent.nodeName);
         }
         
         function buildEndPoint (key) {
@@ -175,7 +177,7 @@
                         '<img src=\"../img/delete.svg\" alt=\"Del\">' +
                     '</button>' +
                 '</div>' +
-            '</li>'            
+            '</li>'
             );
 
         };
