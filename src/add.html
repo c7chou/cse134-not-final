@@ -47,11 +47,11 @@
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
                 
                 <div id="spin"></div>
-                <h1>Firepano</h1>
-                <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
-                <br/>
-                <img class="pano" id="pano" />
+                <p>Upload picture: <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload"></p>
                 
+                <br/>
+                
+                <img class="pano" id="pano" />
 				<p id="save_p"><input id="save" type="button" value="Save It"></p>
 				
 			</form>
@@ -104,7 +104,12 @@
                 var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
                 
                 var habitNameInput = document.getElementById('title').value;
-               var habitOtherInput = document.getElementById('others').value;
+                var habitOtherInput = document.getElementById('others').value;
+                
+                var currentTime = Date.now();
+                if (!Date.now) {
+                    Date.now = function() { return new Date().getTime(); }
+                }
 
                if(/[^a-zA-Z0-9_\-\ /]/.test( habitOtherInput ))
                 {
@@ -117,10 +122,16 @@
                else
                {
                    //make firebase object and push it to DB
-                   myDataRef.push({habitData: {name: name, text: text, 'iconId': selectedIcon,
-                    daysOfWeek: daysOfWeek,
-                    frequencyPerDay: frequencyPerDay}});
-                    document.location='list.html'
+                   myDataRef.push({
+                        habitData: {name: name, text: text, 'iconId': selectedIcon,
+                        daysOfWeek: daysOfWeek,
+                        frequencyPerDay: frequencyPerDay,
+                        'settings': {'Off': '0', 'Sleep':'0','Pause':'0'},
+                        'habitProgress':{'counter': '0', 'maxRecord':'1'}, 
+                        'timestamp': currentTime}
+                   });
+                    
+                    document.location='list.html';
                } 
             });
             
