@@ -26,7 +26,7 @@
         /*******Global variables**************/
         //reference to firebase
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
-        var play = true;
+        var progressData;
         
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
@@ -34,14 +34,21 @@
             var msgTotal = (msgElement.getElementsByTagName("svg"))[0];
             var lines = (msgElement.getElementsByTagName("line"));
             
-            alert('Count about to be updated.');
-            var habitProgressData = myDataRef.child('habitProgress');
-            
-            //var newCount = habitProgressData.counter + 1;
-            //alert(JSON.stringify(habitProgressData));
-            //alert("breakpoint." + newCount);
-            //habitProgressData.update({'counter': newCount});
-            alert("Count updated.");
+            //Update the counter for the progress bar
+            var habitKey = element.parentElement.parentElement.id;
+            var habitProgressRef = myDataRef.child(habitKey + '/habitData/habitProgress/');
+                  
+            habitProgressRef.transaction(function(currentData)
+            {
+                //alert(JSON.stringify(currentData));
+                var maxRecord = currentData.maxRecord;
+                if(currentData.maxRecord <= currentData.counter + 1)
+                {
+                    var maxRecord = parseInt(currentData.maxRecord, 10) + parseInt(1, 10);
+                }
+                habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
+                alert(JSON.stringify(currentData));
+            });
             
             // TODO algorithm to determine how much the line should increase
             if(parseInt(lines[0].getAttribute("x2")) < 150){
@@ -54,15 +61,35 @@
         }
         
         //Pauses the habit
-        function pause(element){
+        function pausePlayHabit(element){
             /* grab from database if it is play or pause. store as variable then check change play/pause */
-            
+            //alert(element.tagName);
             var thisList = (element.parentNode.parentNode);
             var habitElement = (thisList.getElementsByClassName("habit-op"))[0];
+            
+            //Get ref to update setting pause
+            var habitKey = element.parentElement.parentElement.id;
+            var settingsRef = myDataRef.child(habitKey + '/habitData/settings/');
 
             var button = habitElement.getElementsByTagName("button");
             event.stopPropagation();//stops event listener of parent nodes.
             
+            //getting current state of habit, pause or unpaused
+            var play;
+            
+            settingsRef.transaction(function(currentData)
+            {
+    
+                if(currentData.pause === '1')          
+                {
+                    play = false;
+                }
+                else
+                {
+                    play = true;    
+                }
+            });
+        
             if(play)
             {
                 for(i=0;i<button.length;i++)
@@ -73,17 +100,29 @@
                 thisList.style.opacity = "0.5";
                 element.src = "../img/play.png"; 
                 play=false;
+                
+                settingsRef.transaction(function(currentData)
+                {
+                    settingsRef.update({pause: '1'});
+                    //alert(JSON.stringify(currentData));   
+                });
             }
             else
             {
+                //alert('here');
                 for(i=0;i<button.length;i++)
                 {
-                    button[i].setAttribute("disabled",false);
+                    button[i].removeAttribute("disabled");
                 }
                 
                 thisList.style.opacity = "1";
-                element.src = "../img/pause.jpe";  
+                element.src = "../img/pause.jpe";
                 play=true;
+                
+                settingsRef.transaction(function(currentData)
+                {
+                    settingsRef.update({pause: '0'});
+                });
             }
         }
 
@@ -150,14 +189,49 @@
                     '</button>' +
                 '</div>' +
                 '<div class=\"pause\" style=\"position:relative;left:545px;bottom:50px;display:none\">' +
-                    //'<button type=\"button\" class=\"op op-pause\" onclick=\"pause(this);\" title=\"pause\">' +
-                        '<img style=\"position:absolute; top: -60px;\" src=\"../img/pause.jpe\" alt=\"Pause\" height=\"150\" width=\"150\" onclick=\"pause(this);\">' +
+                    //'<button type=\"button\" class=\"op op-pause\" onclick=\"pausePlayHabit(this);\" title=\"pause\">' +
+                        '<img id=\"img'+key+'\" style=\"position:absolute; top: -60px;\" src=\"../img/pause.jpe\" alt=\"Pause\" height=\"150\" width=\"150\" onclick=\"pausePlayHabit(this);\">' +
                     //'</button>' +
                 '</div>' +
             '</li>'            
             );
-
+            //alert(JSON.stringify($('#'+key)));
+            //return $('#'+key);
         };
+
+        /*
+        
+        function displayPausedHabit(name, text, key, iconId, habitProgress) {
+            
+            $('#habit-list').append(
+            
+                
+                <li class="slider" id="-K2tkyfzJG4mIHL9W7jz" style="opacity: 0.5; left: 0px;">
+   <ul class="habit-info">
+      <li>
+         <div class="habit-name">Lift Weights</div>
+      </li>
+      <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
+   </ul>
+   <div class="message">
+      <span class="message-total">
+         <strong>48</strong> days in a row! Best Record: <strong>60</strong><br>
+         <svg height="25" width="150">
+            <line x1="0" y1="0" x2="150" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25"></line>
+            <line x1="150" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25"></line>
+         </svg>
+      </span>
+      <br><span class="message-today">Completed <strong>1/2</strong> for today!</span>
+   </div>
+   <div class="habit-op"><button type="button" class="op op-done" onclick="showMsg(this);" title="done" disabled="true"><img src="../img/done.svg" alt="Done"></button><button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit" disabled="true"><img src="../img/edit.svg" alt="Edit"></button><button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit" disabled="true"><img src="../img/delete.svg" alt="Del"></button></div>
+   <div class="pause" style="position: relative; left: 545px; bottom: 50px; display: none;"><img id="img-K2tkyfzJG4mIHL9W7jz" style="position:absolute; top: -60px;" src="../img/play.png" alt="Pause" height="150" width="150" onclick="pausePlayHabit(this);"></div>
+</li>
+                      
+            );
+        };
+        
+        */
+        
 
         $(document).ready(function() {
             
@@ -171,6 +245,8 @@
                 var habitKey = snapshot.name();
                 //alert(JSON.stringify(data));
                 
+                //saving progress data for counter updates when user confirms their habit for the day is complete
+                
                 if(data.hasOwnProperty('name')){
                     name = data.name ? data.name : '';
                     if(name.trim().length > 0)
@@ -180,12 +256,19 @@
                         }
                 }
                 
-                //alert(JSON.stringify(data.habitProgress));
+                //alert(data.settings.turnoff);
                 if(data.settings.turnoff === '0')
                 {
                     displayHabit(data.name, data.text, habitKey, data.iconId, data.habitProgress);
+                    
+                    //alert(data.settings.pause);
+                    if(data.settings.pause === '1' )
+                        {
+                            //trigger pause style by calling twice
+                            pausePlayHabit(document.getElementById('img'+habitKey));
+                            pausePlayHabit(document.getElementById('img'+habitKey));
+                        }
                 }
-                
             });
             
             //Makes slider go right
@@ -209,8 +292,7 @@
                 }
             });
         });
-        
-        
+           
     </script>
 </body>
 </html>
