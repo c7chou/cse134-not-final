@@ -185,10 +185,14 @@
                else
                {
                    //Update habit
-                   habitDataRef.update({name: name, text: text, 'iconId': selectedIcon,
+                   habitDataRef.update({
+                    name: name, 
+                    text: text, 
+                    'iconId': selectedIcon,
                     daysOfWeek: daysOfWeek,
                     frequencyPerDay: frequencyPerDay});
-                    document.location='list.html'
+                   
+                    document.location='list.html';
                }          
             });
             
