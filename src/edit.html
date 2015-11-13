@@ -117,14 +117,14 @@
                 
                 $('#edit-form').append(          
                     
-                    '<p><label><span id=\"title_text\">Habit Title</span></label></p>' +
+                    '<p><label><span id=\"title_text\"><i style=\"display:none\" id=\"title_ex\" class=\"fa fa-exclamation\"></i>Habit Title</span></label></p>' +
                     '<p><input id=\"title\" type=\"text\" name=\"fullname\" value=\"'+name+'\"></p>' +
                     '<p><label>Habit Icon</label></p>' +
                     '<img id=\"icon1\" class=\"icon\" onclick=\"selectImage(\'icon1\');\" src=\"../img/sleep.jpg\" alt=\"sleep image\"/>' +
                     '<img id=\"icon2\" class=\"icon\" onclick=\"selectImage(\'icon2\');\" src=\"../img/salad.jpg\" alt=\"eat image\"/>' +
                     '<img id=\"icon3\" class=\"icon\" onclick=\"selectImage(\'icon3\');\" src=\"../img/run.jpg\" alt=\"run image\"/>' +
                     '<img id=\"icon4\" class=\"icon\" src=\"../img/add.png\" alt=\"find a image\"/>' +
-                    '<p><label>Weekly Frequency</label></p>' +
+                    '<p id=\"weekly_freq\"><label><i style=\"display:none\" id=\"weekly_ex\" class=\"fa fa-exclamation\"></i>Weekly Frequency</label></p>' +
                     '<div id=\"ck-button\">' +
                         '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"sunday\" '+daysOfWeek.Sunday+'><span>Sun</span></label>' +
                         '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"monday\" '+daysOfWeek.Monday+'><span>Mon</span></label>' +
@@ -135,11 +135,11 @@
                         '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"saturday\" '+daysOfWeek.Saturday+'><span>Sat</span></label>' +
                     '</div>' +
 
-                    '<p><label>Daily Frequency</label></p>' +
+                    '<p id=\"daily_freq\"><label><i style=\"display:none\" id=\"daily_ex\" class=\"fa fa-exclamation\"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>' +
                     '<div id=\"daily-button\">' +
-                        '<label> <input type=\"radio\" name=\"frequencyPerDay\" value=\"1\"><span>1</span></label>' +
-                        '<label> <input type=\"radio\" name=\"frequencyPerDay\" value=\"2\"><span>2</span></label>' +
-                        '<label> <input type=\"radio\" name=\"frequencyPerDay\" value=\"3\"><span>3</span></label>' +
+                        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"1\"><span>1</span></label>' +
+                        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"2\"><span>2</span></label>' +
+                        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"3\"><span>3</span></label>' +
                         '<span id="times">times</span>' +
                     '</div>' +
                     '<p><label><span id=\"others_text\">Others: </span><input id=\"others\" type=\"text\" name=\"day\" value=\"'+text+'\"></label></p>' +
@@ -207,6 +207,14 @@
                /*
                  * Daily Check
                  */
+               
+               if ((habitOtherInput != '') && (frequencyPerDay != undefined)){
+                    daily_oops.style.display = 'block';
+                    
+                    daily_ex.style.display = 'block';
+                    daily_freq.style.color = 'red';
+                    return;
+                }
                 
                 if (habitOtherInput == '') {
                     if (frequencyPerDay == undefined){

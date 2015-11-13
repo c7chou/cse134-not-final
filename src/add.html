@@ -47,7 +47,7 @@
     <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
 
 
-    <p id="daily_freq"><label><i style="display:none" id="daily_ex" class="fa fa-exclamation"></i>Daily Frequency</label></p>
+    <p id="daily_freq"><label><i style="display:none" id="daily_ex" class="fa fa-exclamation"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>
     <div id="daily-button">
         <label> <input type="radio" name="frequencyPerDay" value="1"><span>1</span></label>
         <label> <input type="radio" name="frequencyPerDay" value="2"><span>2</span></label>
@@ -165,6 +165,13 @@
     /*
      * Daily Check
      */
+    if ((habitOtherInput != '') && (frequencyPerDay != undefined)){
+                    daily_oops.style.display = 'block';
+                    daily_oops.style.display = 'red';
+                    daily_ex.style.display = 'block';
+                    daily_freq.style.color = 'red';
+                    return;
+                }
 
     if (habitOtherInput == '') {
       if (frequencyPerDay == undefined){
