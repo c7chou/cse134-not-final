@@ -1,3 +1,100 @@
+/*style for the notifications */
+/* use this for the padding on sides of bar */
+        .notification-box {
+            display: none;
+        }
+        
+        /* check how this looks on other browsers and then fix up all
+         * these background setting statements 
+         */
+        .notification-message {
+            background-color: #339bb9;
+            background-repeat: repeat-x;
+            background-image: -khtml-gradient(linear, left top, left bottom, from(#5bc0de), to(#339bb9));
+            background-image: -moz-linear-gradient(top, #5bc0de, #339bb9);
+            background-image: -ms-linear-gradient(top, #5bc0de, #339bb9);
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5bc0de), color-stop(100%, #339bb9));
+            background-image: -webkit-linear-gradient(top, #5bc0de, #339bb9);
+            background-image: -o-linear-gradient(top, #5bc0de, #339bb9);
+            background-image: linear-gradient(top, #5bc0de, #339bb9);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=
+'#5bc0de', endColorstr='#339bb9', GradientType=0);
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+            border-color: #339bb9 #339bb9 #22697d;
+            border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            position: relative;
+            padding: 7px 15px;
+            margin-bottom: 18px;
+            color: #404040;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        .notification-message .close:hover {
+            color: #000000;
+            text-decoration: none;
+            filter: alpha(opacity=40);
+            -khtml-opacity: 0.4;
+            -moz-opacity: 0.4;
+            opacity: 0.4;
+        }
+
+        .notification-message .close {
+            float: right;
+            color: #000000;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 13.5px;
+            text-shadow: 0 1px 0 #ffffff;
+            filter: alpha(opacity=25);
+            -khtml-opacity: 0.25;
+            -moz-opacity: 0.25;
+            opacity: 0.25;
+            margin-top: 0;
+            font-weight: bold;
+            color: #404040;
+            text-decoration: none;
+        }
+
+        .notification-message .settings:hover {
+            color: #000000;
+            text-decoration: none;
+            filter: alpha(opacity=40);
+            -khtml-opacity: 0.4;
+            -moz-opacity: 0.4;
+            opacity: 0.4;
+        }
+
+        .notification-message .settings {
+            float: right;
+            color: #000000;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 12px;
+            text-shadow: 0 1px 0 #ffffff;
+            filter: alpha(opacity=25);
+            -khtml-opacity: 0.25;
+            -moz-opacity: 0.25;
+            opacity: 0.25;
+            margin-top: 0;
+            font-weight: bold;
+            color: #404040;
+            text-decoration: none;
+        }
+
+        .notification-message p {
+            color: #ffffff;
+            margin-bottom: 0;
+            margin: 0; 
+            padding: 0;
+        }
+
 /* basic structure & layout */
 html{height: 100%;}
 h1{color:#888;text-align: center;}
@@ -44,11 +141,16 @@ body{
 .op-del:active{background:#F22613; border:2px solid red;}
 
 /* add habit */
-#addHabit{position:fixed; bottom: 40px; right:20px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
+#addHabit{position:fixed; bottom: 20px; right:180px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
 #addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
 
+/* add notification */
+#notification{position:fixed; bottom: 20px; right:100px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
+#notification:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
+#notification:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#notification:focus{outline-style:none;}
 
 /* entire container, keeps perspective */
 .flip-container {
@@ -90,6 +192,7 @@ body{
     and (max-width: 500px) {
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
+        .notification-box{width: 350px; margin: 0 auto;}
 }
 
 /* desktop, tablet */
@@ -97,4 +200,5 @@ body{
     and (min-width: 500px) {
     section{width:500px;margin: 0 auto;}
     .message{right:60px;bottom:80px;}
+    .notification-box{width:500px; margin: 0 auto}
 }
