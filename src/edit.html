@@ -5,10 +5,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Edit a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
+        <link rel="stylesheet" href="../css/log.css">
+        <link rel="stylesheet" href="../css/box.css">
+        <link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
+        <script src="../js/log.js"></script>
         <script src="../js/jquery.js"></script>
         <script src="../js/firebase.js"></script>
 	</head>
 	<body>
+        <div class="log-box" id="log">     
+            <div class="log-message">
+                <button type="button" class="log-button" onclick="logout_no()">NO</button>
+                <button type="button" class="log-button" onclick="logout_yes()">YES</button>
+                <p>Are you sure you want to log out?</p>
+            </div>
+        </div>
 		<script>
 			function onStart() {
             	document.getElementById("icon3").style.border="5px solid #42A5F5";
@@ -149,17 +160,27 @@
                 var name = $('#title').val();
                 var text = $('#others').val();
                 
+               /*
+                * Title Check
+                */
+                if (name == ''){
+                    title_ex.style.display = 'block';
+                    title_text.style.color = 'red';
+                    return;   
+                }
+               
                 //var daysOfWeek = {'Monday':'0', 'Tuesday':'0','Wednesday':'0', 'Thursday':'0', 'Friday':'0', 'Saturday':'0', 'Sunday':'0'};
                 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 
                 var daysOfWeek = {};
                 var checkedValues = document.getElementsByName('dayOfTheWeek');
-                
+                var times = 0;
                 for(var i=0, n=checkedValues.length; i<n ; i++)
                 {
                     if(checkedValues[i].checked)
                         {
                             daysOfWeek[days[i]] = 'yes';
+                            times++;
                         }
                     else
                         {
@@ -167,6 +188,15 @@
                         }
                 }
 
+               /*
+                 * Week Check
+                 */
+                
+                if (times == 0){
+                    weekly_ex.style.display = 'block';
+                    weekly_freq.style.color = 'red';
+                    return;
+                }
                 var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
                 
                var habitDataRef = myDataRef.child('habitData');  
@@ -174,6 +204,21 @@
                var habitNameInput = document.getElementById('title').value;
                var habitOtherInput = document.getElementById('others').value;
 
+               /*
+                 * Daily Check
+                 */
+                
+                if (habitOtherInput == '') {
+                    if (frequencyPerDay == undefined){
+                    daily_ex.style.display = 'block';
+                    daily_freq.style.color = 'red';
+                    return;
+                    }
+                }
+                
+                if (frequencyPerDay == undefined)
+                    frequencyPerDay = habitOtherInput;
+               
                if(/[^a-zA-Z0-9_\-\ /]/.test( habitOtherInput ))
                 {
                     alert('Input must be alphanumeric. Please remove non-alphanumeric symbols to continue.');
@@ -221,5 +266,9 @@
                 });
             });
 		</script>
+        <div id="button-box">
+            <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+        </div> 
+        <hr style="height:75px;border-width:0">
 	</body>
 </html>
