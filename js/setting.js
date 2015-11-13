@@ -36,35 +36,35 @@ function toggleSleep(source) {
 }
 
 function updateDb(element)
-        {
-            //alert('called');
-            var habitData = $(element).prop('id');
-            var array = habitData.split('-');
-            var statusStateName = array[0];
-            
-            var habitDataRef = refData.child('-' + array[2] +'/habitData/settings/');
-            
-            var statusStateVal;
-            if($(element).prop("checked") == true)
-            {
-                statusStateVal = '1';
-            }
-            else
-            {
-                statusStateVal = '0';    
-            }
-            
-            if(statusStateName.localeCompare('sleep') == 0)
-            {
-                habitDataRef.update({sleep: statusStateVal});
-            }
-            else if (statusStateName.localeCompare('pause') == 0)
-            {
-                habitDataRef.update({pause: statusStateVal});
-            }
-            else if (statusStateName === 'turnoff')
-            {
-                habitDataRef.update({turnoff: statusStateVal});
-            }
-            
-        }
+{
+    //alert('called');
+    var habitData = $(element).prop('id');
+    var array = habitData.split('-');
+    var statusStateName = array[0];
+
+    var habitDataRef = refData.child('-' + array[2] +'/habitData/settings/');
+
+    var statusStateVal;
+    if($(element).prop("checked") == true)
+    {
+        statusStateVal = '1';
+    }
+    else
+    {
+        statusStateVal = '0';    
+    }
+
+    if(statusStateName.localeCompare('sleep') == 0)
+    {
+        habitDataRef.update({sleep: statusStateVal});
+    }
+    else if (statusStateName.localeCompare('pause') == 0)
+    {
+        habitDataRef.update({pause: statusStateVal});
+    }
+    else if (statusStateName === 'turnoff')
+    {
+        habitDataRef.update({turnoff: statusStateVal});
+    }
+
+}

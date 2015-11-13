@@ -111,39 +111,55 @@
                 selectedIcon = src;
 			}
             
-            function displayHabit(name, iconId, daysOfWeek, frequencyPerDay, text) {
+            function displayHabit(name, iconId, daysOfWeek, frequencyPerDay, text, notiHour, notiMin) {
                 //alert(JSON.stringify(daysOfWeek));
                 var icons = {'sleep.jpg':'icon1', 'salad.jpg':'icon2','run.jpg':'icon3', 'add.png':'icon4', }
                 
                 $('#edit-form').append(          
                     
-                    '<p><label><span id=\"title_text\"><i style=\"display:none\" id=\"title_ex\" class=\"fa fa-exclamation\"></i>Habit Title</span></label></p>' +
-                    '<p><input id=\"title\" type=\"text\" name=\"fullname\" value=\"'+name+'\"></p>' +
-                    '<p><label>Habit Icon</label></p>' +
-                    '<img id=\"icon1\" class=\"icon\" onclick=\"selectImage(\'icon1\');\" src=\"../img/sleep.jpg\" alt=\"sleep image\"/>' +
-                    '<img id=\"icon2\" class=\"icon\" onclick=\"selectImage(\'icon2\');\" src=\"../img/salad.jpg\" alt=\"eat image\"/>' +
-                    '<img id=\"icon3\" class=\"icon\" onclick=\"selectImage(\'icon3\');\" src=\"../img/run.jpg\" alt=\"run image\"/>' +
-                    '<img id=\"icon4\" class=\"icon\" src=\"../img/add.png\" alt=\"find a image\"/>' +
-                    '<p id=\"weekly_freq\"><label><i style=\"display:none\" id=\"weekly_ex\" class=\"fa fa-exclamation\"></i>Weekly Frequency</label></p>' +
-                    '<div id=\"ck-button\">' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"sunday\" '+daysOfWeek.Sunday+'><span>Sun</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"monday\" '+daysOfWeek.Monday+'><span>Mon</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"tuesday\" '+daysOfWeek.Tuesday+'><span>Tues</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"wednesday\" '+daysOfWeek.Wednesday+'><span>Wed</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"thursday\" '+daysOfWeek.Thursday+'><span>Thur</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"friday\" '+daysOfWeek.Friday+'><span>Fri</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"saturday\" '+daysOfWeek.Saturday+'><span>Sat</span></label>' +
-                    '</div>' +
+    '<p><label><span id=\"title_text\"><i style=\"display:none\" id=\"title_ex\" class=\"fa fa-exclamation\"></i>Habit Title</span></label></p>' +
+    '<p><input id=\"title\" type=\"text\" name=\"fullname\" value=\"'+name+'\"></p>' +
+    '<p><label>Habit Icon</label></p>' +
+    '<img id=\"icon1\" class=\"icon\" onclick=\"selectImage(\'icon1\');\" src=\"../img/sleep.jpg\" alt=\"sleep image\"/>' +
+    '<img id=\"icon2\" class=\"icon\" onclick=\"selectImage(\'icon2\');\" src=\"../img/salad.jpg\" alt=\"eat image\"/>' +
+    '<img id=\"icon3\" class=\"icon\" onclick=\"selectImage(\'icon3\');\" src=\"../img/run.jpg\" alt=\"run image\"/>' +
+    '<img id=\"icon4\" class=\"icon\" src=\"../img/add.png\" alt=\"find a image\"/>' +
+    '<p id=\"weekly_freq\"><label><i style=\"display:none\" id=\"weekly_ex\" class=\"fa fa-exclamation\"></i>Weekly Frequency</label></p>' +
+    '<div id=\"ck-button\">' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"sunday\" '+daysOfWeek.Sunday+'><span>Sun</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"monday\" '+daysOfWeek.Monday+'><span>Mon</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"tuesday\" '+daysOfWeek.Tuesday+'><span>Tues</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"wednesday\" '+daysOfWeek.Wednesday+'><span>Wed</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"thursday\" '+daysOfWeek.Thursday+'><span>Thur</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"friday\" '+daysOfWeek.Friday+'><span>Fri</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"dayOfTheWeek\" value=\"saturday\" '+daysOfWeek.Saturday+'><span>Sat</span></label>' +
+    '</div>' +
 
-                    '<p id=\"daily_freq\"><label><i style=\"display:none\" id=\"daily_ex\" class=\"fa fa-exclamation\"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>' +
-                    '<div id=\"daily-button\">' +
-                        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"1\"><span>1</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"2\"><span>2</span></label>' +
-                        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"3\"><span>3</span></label>' +
-                        '<span id="times">times</span>' +
-                    '</div>' +
-                    '<p><label><span id=\"others_text\">Others: </span><input id=\"others\" type=\"text\" name=\"day\" value=\"'+text+'\"></label></p>' +
+    '<p id=\"daily_freq\"><label><i style=\"display:none\" id=\"daily_ex\" class=\"fa fa-exclamation\"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>' +
+    '<div id=\"daily-button\">' +
+        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"1\"><span>1</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"2\"><span>2</span></label>' +
+        '<label> <input type=\"checkbox\" name=\"frequencyPerDay\" value=\"3\"><span>3</span></label>' +
+        '<span id=\"times\">times</span>' +
+    '</div>' +
+    '<p><label><span id=\"others_text\">Others: </span><input id=\"others\" type=\"text\" name=\"day\" value=\"'+text+'\"></label></p>' +
+
+                  
+   '<div><p><label>'+
+      '<span id=\"noti_text\">Notification Interval: </span>'+
+      '<input id=\"notificationHours\" type=\"number\" maxlength=\"2\" onchange=\"isNumberInHour(this)\" value=\"'+notiHour+'\">'+
+      '<span class=\"noti_hr_min\">hours</span>'+
+      '<input id=\"notificationMins\" type=\"number\" maxlength=\"2\" onchange=\"isNumberInMin(this)\" value=\"'+notiMin+'\" >'+
+      '<span class=\"noti_hr_min\">minutes</span>'+
+    '</label></p></div>'+
+
+                  
+                  
+                  
+                  
                     '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\"></p>'
+                  
+                  
                              
                 );
                 
@@ -203,6 +219,13 @@
 
                var habitNameInput = document.getElementById('title').value;
                var habitOtherInput = document.getElementById('others').value;
+             /* notification variable */ 
+
+               var notiHour = document.getElementById("notificationHours").value;
+               var notiMin = document.getElementById("notificationMins").value;
+
+
+
 
                /*
                  * Daily Check
@@ -238,12 +261,17 @@
                else
                {
                    //Update habit
-                   habitDataRef.update({
+                  habitDataRef.update({
                     name: name, 
                     text: text, 
                     'iconId': selectedIcon,
                     daysOfWeek: daysOfWeek,
-                    frequencyPerDay: frequencyPerDay});
+                    frequencyPerDay: frequencyPerDay,
+                    'notiTime':{
+                      notiHour: notiHour,
+                      notiMins: notiMin
+                    }
+                  });
                    
                     document.location='list.html';
                }          
@@ -270,9 +298,21 @@
                     }
                     //alert(JSON.stringify(daysOfWeekStates));
                     
-                    displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text);
+                    displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text, data.notiTime.notiHour, data.notiTime.notiMins);
                 });
             });
+          
+          
+  function isNumberInHour(input){
+      if( input.value < 0) input.value = 0;
+      if( input.value > 23) input.value = 23;
+  }
+
+  function isNumberInMin(input){
+      if( input.value < 0) input.value = 0;
+      if( input.value > 59) input.value = 59;
+  } 
+        
 		</script>
         <div id="button-box">
             <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
