@@ -49,9 +49,9 @@
 
     <p id="daily_freq"><label><i style="display:none" id="daily_ex" class="fa fa-exclamation"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>
     <div id="daily-button">
-        <label> <input type="radio" name="frequencyPerDay" value="1"><span>1</span></label>
-        <label> <input type="radio" name="frequencyPerDay" value="2"><span>2</span></label>
-        <label> <input type="radio" name="frequencyPerDay" value="3"><span>3</span></label>
+        <label> <input type="checkbox" name="frequencyPerDay" value="1"><span>1</span></label>
+        <label> <input type="checkbox" name="frequencyPerDay" value="2"><span>2</span></label>
+        <label> <input type="checkbox" name="frequencyPerDay" value="3"><span>3</span></label>
         <span id="times">times</span>
     </div>
     <p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
@@ -63,11 +63,14 @@
     <div>
       <p>
       <label>
+        <div id="hour_min_ex" style="display:none" >
+          <i class="fa fa-exclamation"></i>
+        </div>
         <span id="noti_text">Notification Interval: </span>
         <input id="notificationHours" type="number" maxlength="2" placeholder="2" onchange="isNumberInHour(this)">
-        <span class="noti_hr_min">hours</span>
+        <span id="hour_val" class="noti_hr_min">hours</span>
         <input id="notificationMins" type="number" maxlength="2" placeholder="15" onchange="isNumberInMin(this)">
-        <span class="noti_hr_min">minutes</span>
+        <span id="min_val" class="noti_hr_min">minutes</span>
       </label>
       </p>
     </div>
@@ -155,10 +158,27 @@
 
 
 
+      
     /*************************/
 
-
-
+    /*
+     * Notification check
+     */
+    if (notiHour == ''){
+        hour_min_ex.style.display = 'block';
+        hour_min_ex.style.color = 'red';
+        hour_val.style.color = 'red';
+        return;
+    }
+        
+    if (notiMin == ''){
+        hour_min_ex.style.display = 'block';
+        hour_min_ex.style.color = 'red';
+        min_val.style.color = 'red';
+        return; 
+    }
+        
+      
 
     /*
      * Daily Check

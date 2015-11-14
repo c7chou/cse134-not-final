@@ -146,11 +146,12 @@
 
                   
    '<div><p><label>'+
+      '<div id=\"hour_min_ex\" style=\"display:none\" ><i class=\"fa fa-exclamation\"></i></div>' +
       '<span id=\"noti_text\">Notification Interval: </span>'+
       '<input id=\"notificationHours\" type=\"number\" maxlength=\"2\" onchange=\"isNumberInHour(this)\" value=\"'+notiHour+'\">'+
-      '<span class=\"noti_hr_min\">hours</span>'+
+      '<span class=\"noti_hr_min\" id="hour_val">hours</span>'+
       '<input id=\"notificationMins\" type=\"number\" maxlength=\"2\" onchange=\"isNumberInMin(this)\" value=\"'+notiMin+'\" >'+
-      '<span class=\"noti_hr_min\">minutes</span>'+
+      '<span class=\"noti_hr_min\" id="min_val">minutes</span>'+
     '</label></p></div>'+
 
                   
@@ -224,7 +225,22 @@
                var notiHour = document.getElementById("notificationHours").value;
                var notiMin = document.getElementById("notificationMins").value;
 
-
+               /*
+                * Notification check
+                */
+                if (notiHour == ''){
+                    hour_min_ex.style.display = 'block';
+                    hour_min_ex.style.color = 'red';
+                    hour_val.style.color = 'red';
+                    return;
+                }
+        
+                if (notiMin == ''){
+                    hour_min_ex.style.display = 'block';
+                    hour_min_ex.style.color = 'red';
+                    min_val.style.color = 'red';
+                    return; 
+                }
 
 
                /*
