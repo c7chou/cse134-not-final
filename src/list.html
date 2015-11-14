@@ -7,11 +7,11 @@
     <link rel="stylesheet" type="text/css" href="../css/list.css">
     <link rel="stylesheet" type="text/css" href="../css/box.css">
     <link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/log.css"> 
+    <link rel="stylesheet" href="../css/log.css">
     <script src="../js/firebase.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/not.js"></script>
-    <script src="../js/log.js"></script> 
+    <script src="../js/log.js"></script>
     
 </head>
 <body>
@@ -23,23 +23,41 @@
             </button>
             <p>Come Check Back in on Your Habits!</p>
         </div>
-    </div>    
-    <div class="log-box" id="log">     
+    </div>
+    <div class="log-box" id="log">
         <div class="log-message">
             <button type="button" class="log-button" onclick="logout_no()">NO</button>
             <button type="button" class="log-button" onclick="logout_yes()">YES</button>
             <p>Are you sure you want to log out?</p>
         </div>
-    </div>     
+    </div>
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
             
-        </ul>     
+        </ul>
     </section>
-   
     
-    <script type="text/javascript">  
+    <div id="overlay" class="overlay">
+      
+      <div id="deleteOverlay" class="deleteOverlay">
+        <h2>Are you sure?</h2>
+        <div class="buttons">
+          <input class="yesDeleteButton" type="button" value="Yes" onclick="deleteConfirmed(child)">
+          <input class="noDeleteButton" type="button" value="No" onclick="deleteOverlay()">
+        </div>
+      </div>
+      
+      <div id="editOverlay" class="editOverlay">
+        <h2>Are you sure?</h2>
+        <div class="buttons">
+          <input class="yesEditButton" type="button" value="Yes" onclick="editConfirmed()">
+          <input class="noEditButton" type="button" value="No" onclick="editOverlay()">
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript">
         /*******Global variables**************/
         //reference to firebase
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
@@ -97,13 +115,13 @@
             settingsRef.transaction(function(currentData)
             {
     
-                if(currentData.pause === '1')          
+                if(currentData.pause === '1')
                 {
                     play = false;
                 }
                 else
                 {
-                    play = true;    
+                    play = true;
                 }
             });
         
@@ -115,13 +133,13 @@
                 }
                 
                 thisList.style.opacity = "0.5";
-                element.src = "../img/play.png"; 
+                element.src = "../img/play.png";
                 play=false;
                 
                 settingsRef.transaction(function(currentData)
                 {
                     settingsRef.update({pause: '1'});
-                    //alert(JSON.stringify(currentData));   
+                    //alert(JSON.stringify(currentData));
                 });
             }
             else
@@ -144,10 +162,13 @@
         }
 
         //Deletes habit from page and Db
-        function deleteHabit(element){
+        function getChild(element){
             var child = element.parentNode.parentNode;
+            return child;
+        }
+        
+        function deleteHabit(child){
             var parent = child.parentNode;
-            
             //delete habit from DB
             var id = child.getAttribute('id');
             var deleteHabitRef = buildEndPoint(id);
@@ -155,7 +176,7 @@
                               
             parent.removeChild(child);
             
-            //alert(parent.nodeName);    
+            //alert(parent.nodeName);
         }
         
         function buildEndPoint (key) {
@@ -173,6 +194,30 @@
         function editHabit (element){
             var habitId = element.parentNode.parentNode.id;
             document.location='edit.html?' + habitId;
+        }
+        
+        function deleteOverlay() {
+        	var el = document.getElementById("deleteOverlay");
+          var la = document.getElementById("overlay");
+          la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
+          el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+        }
+        
+        function deleteConfirmed(child){
+          deleteOverlay();
+          deleteHabit(child);
+        }
+        
+        function editOverlay() {
+        	var el = document.getElementById("editOverlay");
+          var la = document.getElementById("overlay");
+          la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
+          el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+        }
+        
+        function editConfirmed(){
+          editOverlay();
+          editHabit(this);
         }
         
         function displayHabit(name, text, key, iconId, habitProgress) {
@@ -201,7 +246,7 @@
                     '<button type=\"button\" class=\"op op-edit\" onclick=\"editHabit(this);\" title=\"edit habit\">' +
                         '<img src=\"../img/edit.svg\" alt=\"Edit\">' +
                     '</button>' +
-                    '<button type=\"button\" class=\"op op-del\" onclick=\"deleteHabit(this);\" title=\"delete habit\">' +
+                    '<button type=\"button\" class=\"op op-del\" onclick=\"child = getChild(this); deleteOverlay()\" title=\"delete habit\">' +
                         '<img src=\"../img/delete.svg\" alt=\"Del\">' +
                     '</button>' +
                 '</div>' +
@@ -210,7 +255,7 @@
                         '<img id=\"img'+key+'\" style=\"position:absolute; top: -60px;\" src=\"../img/pause.jpe\" alt=\"Pause\" height=\"150\" width=\"150\" onclick=\"pausePlayHabit(this);\">' +
                     //'</button>' +
                 '</div>' +
-            '</li>'            
+            '</li>'
             );
             //alert(JSON.stringify($('#'+key)));
             //return $('#'+key);
@@ -300,12 +345,12 @@
                 if($pause.css("display")=="none")
                 {
                     $(this).animate({"left":"-=100px"}, "fast");
-                    $(this).find(".pause").show("fast");   
+                    $(this).find(".pause").show("fast");
                 }
                 else
                 {
                     $(this).animate({"left":"+=100px"}, "fast");
-                    $(this).find(".pause").hide("fast");  
+                    $(this).find(".pause").hide("fast");
                 }
             });
         });
@@ -316,9 +361,8 @@
 
         <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
             
-        <button type="button" id="logout" onclick="logout_called()">LOGOUT</button> 
-
-    </div> 
+        <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+    </div>
     <hr style="height:100px;border-width:0">
 </body>
 </html>
