@@ -16,13 +16,17 @@
 
 /*
  * BUTTON TO ADD TO EACH HTML PAGE:
-<button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+    <div id="button-box">
+        <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+    </div> 
+    <hr style="height:100px;border-width:0">
  */
 
 /*
  * SRC TO ADD TO EACH HTML PAGE:
     <script src="../js/log.js"></script>
     <link rel="stylesheet" href="../css/log.css">
+    <link rel="stylesheet" href="../css/box.css">
  */
 
 @media only screen and (max-width: 500px) {
