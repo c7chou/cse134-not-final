@@ -66,7 +66,7 @@
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             
-            var msgTotal = (msgElement.getElementsByTagName("svg"))[0];
+            var values = (msgElement.getElementsByTagName("strong"));
             var lines = (msgElement.getElementsByTagName("line"));
             
             //Update the counter for the progress bar
@@ -82,15 +82,24 @@
                     var maxRecord = parseInt(currentData.maxRecord, 10) + parseInt(1, 10);
                 }
                 habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
-                alert(JSON.stringify(currentData));
+                //alert(JSON.stringify(currentData));
+                
+                // TODO TODO COMBINE THIS AND THE ABOVE IF STATEMENT
+                if(currentData.maxRecord > currentData.counter){
+                    // UPDATE the number of times done that day
+                    // if(number of times == needed to be done a day, then update) 
+                    lines[0].setAttribute("x2", (currentData.counter+1)/currentData.maxRecord*150);
+                    lines[1].setAttribute("x1", (currentData.counter+1)/currentData.maxRecord*150);
+                    
+                    values[0].innerHTML = currentData.counter+1;
+                    values[1].innerHTML = currentData.maxRecord;
+                }else{
+                    // UPDATE MAX NUMBER
+                }
             });
             
             // TODO algorithm to determine how much the line should increase
-            if(parseInt(lines[0].getAttribute("x2")) < 150){
-                lines[0].setAttribute("x2", parseInt(lines[0].getAttribute("x2"))+10);
-                lines[1].setAttribute("x1", parseInt(lines[1].getAttribute("x1"))+10);
-                // TODO also update the current number
-            }
+            
             
             msgElement.style.visibility="visible";
         }
@@ -231,7 +240,7 @@
                 '</ul>' +
                 '<div class=\"message\">' +
                     '<span class=\"message-total\">' +
-                        '<strong>48</strong> days in a row! Best Record: <strong>60</strong><br>' +
+                        '<strong>' + habitProgress['counter'] + '</strong> days in a row! Best Record: <strong>' + habitProgress['maxRecord'] + '</strong><br>' +
                         '<svg height=\"25\" width=\"150\">' +
                             '<line x1=\"0\" y1=\"0\" x2=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y2=\"0\" style=\"stroke:rgba(65, 131, 215, 0.8);stroke-width:25\" />' +
                             '<line x1=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y1=\"0\" x2=\"'+150+'\" y2=\"0\" style=\"stroke:rgba(171,171,171,0.6);stroke-width:25\" />' +

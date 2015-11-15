@@ -13,7 +13,7 @@
         <script src="../js/firebase.js"></script>
 	</head>
 	<body>
-        <div class="log-box" id="log">     
+        <div class="log-box" id="log">
             <div class="log-message">
                 <button type="button" class="log-button" onclick="logout_no()">NO</button>
                 <button type="button" class="log-button" onclick="logout_yes()">YES</button>
@@ -65,11 +65,21 @@
 
 		</div>
         
+		<div id="overlay" class="overlay">
+		  <div id="editOverlay" class="editOverlay">
+        <h3>Are you sure?</h3>
+        <div class="buttons">
+          <input id = "editConfirmed" class="yesEditButton" type="button" value="Yes">
+          <input class="noEditButton" type="button" value="No" onclick="editOverlay()">
+        </div>
+      </div>
+    </div>
+    
 		<script>
             
             //Method splits URL and makes list of given paramaters and id values
             var QueryString = function() {
-                  // This function is anonymous, is executed immediately and 
+                  // This function is anonymous, is executed immediately and
                   // the return value is assigned to QueryString!
                   var query_string = {};
                   var query = window.location.search.substring(1);
@@ -87,8 +97,8 @@
                     } else {
                       query_string[pair[0]].push(decodeURIComponent(pair[1]));
                     }
-                  } 
-                    return query_string;        
+                  }
+                    return query_string;
             }();
             
             var habitId = window.location.search.substring(1);
@@ -115,7 +125,7 @@
                 //alert(JSON.stringify(daysOfWeek));
                 var icons = {'sleep.jpg':'icon1', 'salad.jpg':'icon2','run.jpg':'icon3', 'add.png':'icon4', }
                 
-                $('#edit-form').append(          
+                $('#edit-form').append(
                     
     '<p><label><span id=\"title_text\"><i style=\"display:none\" id=\"title_ex\" class=\"fa fa-exclamation\"></i>Habit Title</span></label></p>' +
     '<p><input id=\"title\" type=\"text\" name=\"fullname\" value=\"'+name+'\"></p>' +
@@ -158,7 +168,7 @@
                   
                   
                   
-                    '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\"></p>'
+                    '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\" onClick="editOverlay()\"></p>'
                   
                   
                              
@@ -171,7 +181,7 @@
                 $('input[name=frequencyPerDay][value='+frequencyPerDay+']').attr('checked', 'checked');
             };
             
-           $(document).on('click', '#save', function(event) {
+           $(document).on('click', '#editConfirmed', function(event) {
 
                 //Get element information
                 var name = $('#title').val();
@@ -183,7 +193,7 @@
                 if (name == ''){
                     title_ex.style.display = 'block';
                     title_text.style.color = 'red';
-                    return;   
+                    return;
                 }
                
                 //var daysOfWeek = {'Monday':'0', 'Tuesday':'0','Wednesday':'0', 'Thursday':'0', 'Friday':'0', 'Saturday':'0', 'Sunday':'0'};
@@ -192,6 +202,9 @@
                 var daysOfWeek = {};
                 var checkedValues = document.getElementsByName('dayOfTheWeek');
                 var times = 0;
+                
+                editOverlay();
+                
                 for(var i=0, n=checkedValues.length; i<n ; i++)
                 {
                     if(checkedValues[i].checked)
@@ -216,11 +229,11 @@
                 }
                 var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
                 
-               var habitDataRef = myDataRef.child('habitData');  
+               var habitDataRef = myDataRef.child('habitData');
 
                var habitNameInput = document.getElementById('title').value;
                var habitOtherInput = document.getElementById('others').value;
-             /* notification variable */ 
+             /* notification variable */
 
                var notiHour = document.getElementById("notificationHours").value;
                var notiMin = document.getElementById("notificationMins").value;
@@ -239,7 +252,7 @@
                     hour_min_ex.style.display = 'block';
                     hour_min_ex.style.color = 'red';
                     min_val.style.color = 'red';
-                    return; 
+                    return;
                 }
 
 
@@ -278,8 +291,8 @@
                {
                    //Update habit
                   habitDataRef.update({
-                    name: name, 
-                    text: text, 
+                    name: name,
+                    text: text,
                     'iconId': selectedIcon,
                     daysOfWeek: daysOfWeek,
                     frequencyPerDay: frequencyPerDay,
@@ -290,7 +303,7 @@
                   });
                    
                     document.location='list.html';
-               }          
+               }
             });
             
             $(document).ready(function() {
@@ -317,7 +330,13 @@
                     displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text, data.notiTime.notiHour, data.notiTime.notiMins);
                 });
             });
-          
+            
+  function editOverlay() {
+  	var el = document.getElementById("editOverlay");
+    var la = document.getElementById("overlay");
+    la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
+    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+  }
           
   function isNumberInHour(input){
       if( input.value < 0) input.value = 0;
@@ -327,12 +346,12 @@
   function isNumberInMin(input){
       if( input.value < 0) input.value = 0;
       if( input.value > 59) input.value = 59;
-  } 
+  }
         
 		</script>
         <div id="button-box">
             <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
-        </div> 
+        </div>
         <hr style="height:100px;border-width:0">
 	</body>
 </html>

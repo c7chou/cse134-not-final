@@ -36,7 +36,7 @@
         
         //used to go to the settings/notifications page
         function set(){
-            window.alert("calls Jerry's page");
+            window.location = '../src/notification.html';
         }
         
         //puts the alert to asleep temporarily
