@@ -204,6 +204,55 @@ div label input {
 #ck-button input:hover + span {
     cursor: pointer;
 }
+/***********************/
+#notificationIntervalBar{
+	 	visibility: hidden;
+		display: block;
+}
+#noti-button {  
+    overflow:auto;
+}
+
+#noti-button label {
+    margin:8px;
+		margin-left: 0;
+    border-radius:5px;
+	/*border:1px solid #D0D0D0;*/
+    background-color:#EFEFEF;
+    float:left;
+    width:15.0em;
+	font-size: large;
+		color:#6c6c6c;
+}
+
+#noti-button label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+    /*border:1px solid #D0D0D0;*/
+    overflow:auto;
+
+}
+
+#noti-button label input {
+    position:absolute;
+    top:-100%;
+}
+
+#noti-button input:checked + span {
+    background-color:#9c9696; 
+    border-radius:5px;
+    color:#fff;
+}
+#noti-button input:hover + span {
+    cursor: pointer;
+}
+/***************************/
+
+
+
+
+
 
 #daily-button {  
     overflow:auto;
