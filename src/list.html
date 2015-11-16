@@ -28,14 +28,30 @@
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
         var progressData;
         
+        function httpGet(theUrl)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+        
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             
             var msgTotal = (msgElement.getElementsByTagName("svg"))[0];
             var lines = (msgElement.getElementsByTagName("line"));
             
+            
+            
             //Update the counter for the progress bar
             var habitKey = element.parentElement.parentElement.id;
+            
+            //alert('fadfa');
+            //var respond = httpGet('https://jjb750uy9yj.firebaseio-demo.com/habits/' + habitKey+ '/habitData/habitProgress.json');
+            //alert(respond);
+            
+            
             var habitProgressRef = myDataRef.child(habitKey + '/habitData/habitProgress/');
                   
             habitProgressRef.transaction(function(currentData)
@@ -47,7 +63,7 @@
                     var maxRecord = parseInt(currentData.maxRecord, 10) + parseInt(1, 10);
                 }
                 habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
-                alert(JSON.stringify(currentData));
+                //alert(JSON.stringify(currentData));
             });
             
             // TODO algorithm to determine how much the line should increase
