@@ -1,144 +1,380 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Add a habit</title>
-		<link rel="stylesheet" href="../css/forms.css">
-        <link rel="javascript" href="../css/forms.css">
-        <script src="../js/jquery.js"></script>
-        <script src="../js/firebase.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min.js"></script>
-        <script src="../js/sha256.js"></script>
-        <script src="../js/uploadImg.js"></script>       
-	</head>
-	<body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add a habit</title>
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="javascript" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/log.css">
+  <link rel="stylesheet" href="../css/box.css">
+  <link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
+  <script src="../js/log.js"></script>
+  <script src="../js/jquery.js"></script>
+  <script src="../js/firebase.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min.js"></script>
+  <script src="../js/sha256.js"></script>
+  <script src="../js/uploadImg.js"></script>       
+</head>
+<body>
+<div class="log-box" id="log">     
+  <div class="log-message">
+      <button type="button" class="log-button" onclick="logout_no()">NO</button>
+      <button type="button" class="log-button" onclick="logout_yes()">YES</button>
+      <p>Are you sure you want to log out?</p>
+  </div>
+</div>
+<div class="forms">
+  <h2>Add A Habit</h2>
+  <form>
+    <p><label><span id="title_text"><i style="display:none" id="title_ex" class="fa fa-exclamation"></i>Habit Title</span></label></p>
+    <p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes"></p>
+    <p><label>Habit Icon</label></p>
+    <img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
+    <img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
+    <img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
+    <img id="icon4" class="icon" src="../img/add.png" alt="find a image"/>
+    <p id="weekly_freq"><label><i style="display:none" id="weekly_ex" class="fa fa-exclamation"></i>Weekly Frequency</label></p>
+    <div id="ck-button">
+        <label> <input id="tester" type="checkbox" name="dayOfTheWeek" value="sunday"><span>Sun</span></label>
+        <label> <input type="checkbox" name="dayOfTheWeek" value="monday"><span>Mon</span></label>
+        <label> <input type="checkbox" name="dayOfTheWeek" value="tuesday"><span>Tues</span></label>
+        <label> <input type="checkbox" name="dayOfTheWeek" value="wednesday"><span>Wed</span></label>
+        <label> <input type="checkbox" name="dayOfTheWeek" value="thursday"><span>Thur</span></label>
+        <label> <input type="checkbox" name="dayOfTheWeek" value="friday"><span>Fri</span></label>
+        <label> <input type="checkbox" name="dayOfTheWeek" value="saturday"><span>Sat</span></label>
+    </div>
+    <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
 
-		<div class="forms">
-			<h2>Add A Habit</h2>
-			<form>
-				<p><label><span id="title_text">Habit Title</span></label></p>
-				<p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes"></p>
-				<p><label>Habit Icon</label></p>
-				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
-				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
-				<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
-				<img id="icon4" class="icon" src="../img/add.png" alt="find a image"/>
-				<p><label>Weekly Frequency</label></p>
-				<div id="ck-button">
-					<label> <input id="tester" type="checkbox" name="dayOfTheWeek" value="sunday"><span>Sun</span></label>
-					<label> <input type="checkbox" name="dayOfTheWeek" value="monday"><span>Mon</span></label>
-					<label> <input type="checkbox" name="dayOfTheWeek" value="tuesday"><span>Tues</span></label>
-					<label> <input type="checkbox" name="dayOfTheWeek" value="wednesday"><span>Wed</span></label>
-					<label> <input type="checkbox" name="dayOfTheWeek" value="thursday"><span>Thur</span></label>
-					<label> <input type="checkbox" name="dayOfTheWeek" value="friday"><span>Fri</span></label>
-					<label> <input type="checkbox" name="dayOfTheWeek" value="saturday"><span>Sat</span></label>
-				</div>
-                <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
+
+    <p id="daily_freq"><label><i style="display:none" id="daily_ex" class="fa fa-exclamation"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>
+    <div id="daily-button">
+        <label> <input type="checkbox" name="frequencyPerDay" value="1"><span>1</span></label>
+        <label> <input type="checkbox" name="frequencyPerDay" value="2"><span>2</span></label>
+        <label> <input type="checkbox" name="frequencyPerDay" value="3"><span>3</span></label>
+        <span id="times">times</span>
+    </div>
+    <p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
+
+    <div id="spin"></div>
+    <p>Upload picture: <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload"></p>
+    <img class="pano" id="pano" />
+
+    <div>
+      <p>
+      <label>
+        <div id="hour_min_ex" style="display:none" >
+          <i class="fa fa-exclamation"></i>
+        </div>
+        <span id="noti_text">Notification Interval: </span>
+        <input id="notificationHours" type="number" maxlength="2" placeholder="2" onchange="isNumberInHour(this)">
+        <span id="hour_val" class="noti_hr_min">hours</span>
+        <input id="notificationMins" type="number" maxlength="2" placeholder="15" onchange="isNumberInMin(this)">
+        <span id="min_val" class="noti_hr_min">minutes</span>
+      </label>
+      </p>
+    </div>
+
+    
+    <br/>
+    <p id="save_p"><input id="save" type="button" value="Save It"></p>
+
+  </form>
+
+</div>
+
+
+<script>
+
+  /***Global Variables***/
+  var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
+  var selectedIcon = 'sleep.jpg';//start with add-icon picture, by default
+
+  function selectImage(name) {
+    //Clear all the other effects
+    document.getElementById('icon1').style.border = "none";
+    document.getElementById('icon2').style.border = "none";
+    document.getElementById('icon3').style.border = "none";
+    var image = document.getElementById(name);
+    image.style.border = "5px solid #42A5F5";
+
+    var srcArray = image.src.split('/');
+    var src = srcArray[srcArray.length - 1]
+
+    //save current selected icon
+    selectedIcon = src;
+  }
+
+  $('#save').click(function(event) {
+
+    //Get element information
+    var name = $('#title').val();
+    var text = $('#others').val();
+
+    /*
+     * Title Check
+     */
+    if (name == ''){
+      title_ex.style.display = 'block';
+      title_text.style.color = 'red';
+      return;   
+    }
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    var daysOfWeek = {};
+    var checkedValues = document.getElementsByName('dayOfTheWeek');
+    var times = 0;
+    for(var i=0, n=checkedValues.length; i<n ; i++)
+    {
+      if(checkedValues[i].checked)
+      {
+        daysOfWeek[days[i]] = 'yes';
+        times++;
+      }
+      else
+      {
+        daysOfWeek[days[i]] = 'no';
+      }
+    }
+
+    /*
+     * Week Check
+     */
+
+    if (times == 0){
+        weekly_ex.style.display = 'block';
+        weekly_freq.style.color = 'red';
+        return;
+    }
+    var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
+
+    var habitNameInput = document.getElementById('title').value;
+    var habitOtherInput = document.getElementById('others').value;
+
+    /* notification variable */ 
+
+    var notiHour = document.getElementById("notificationHours").value;
+    var notiMin = document.getElementById("notificationMins").value;
+
+
+
+      
+    /*************************/
+
+    /*
+     * Notification check
+     */
+    if (notiHour == ''){
+        hour_min_ex.style.display = 'block';
+        hour_min_ex.style.color = 'red';
+        hour_val.style.color = 'red';
+        return;
+    }
+        
+    if (notiMin == ''){
+        hour_min_ex.style.display = 'block';
+        hour_min_ex.style.color = 'red';
+        min_val.style.color = 'red';
+        return; 
+    }
+        
+      
+
+    /*
+     * Daily Check
+     */
+    if ((habitOtherInput != '') && (frequencyPerDay != undefined)){
+                    daily_oops.style.display = 'block';
+                    daily_oops.style.display = 'red';
+                    daily_ex.style.display = 'block';
+                    daily_freq.style.color = 'red';
+                    return;
+                }
+
+    if (habitOtherInput == '') {
+      if (frequencyPerDay == undefined){
+      daily_ex.style.display = 'block';
+      daily_freq.style.color = 'red';
+      return;
+      }
+    }
+
+    if (frequencyPerDay == undefined)
+      frequencyPerDay = habitOtherInput;
+
+    var currentTime = Date.now();
+    if (!Date.now) {
+      Date.now = function() { return new Date().getTime(); }
+    }
+
+    if(/[^a-zA-Z0-9_\-\ /]/.test( habitOtherInput ))
+    {
+      alert('Input must be alphanumeric. Please remove non-alphanumeric symbols to continue.');
+    }
+    else if(/[^a-zA-Z0-9\-\ /]/.test( habitNameInput ))
+    {
+      alert('Input must be alphanumeric. Please remove non-alphanumeric symbols to continue.');
+    }
+    else
+    {
+      //make firebase object and push it to DB
+      myDataRef.push({
+        habitData: {
+          name: name, 
+          text: text, 
+          'iconId': selectedIcon,
+          daysOfWeek: daysOfWeek,
+          frequencyPerDay: frequencyPerDay,
+          'settings': {
+            'turnoff': '0', 
+            'sleep':'0',
+            'pause':'0'
+          },
+          'habitProgress':{	
+            'counter': '0', 
+            'maxRecord':'1'
+          }, 
+          'timestamp': currentTime,
+          'notiTime':{
+            notiHour: notiHour,
+            notiMins: notiMin
+          }
+        }
+      });
+
+      document.location='list.html';
+    } 
+  }); 
+
+  $(document).ready(function() {
+      //event.preventDefault(); //prevent submit: for testing purposes
+      //alert("End.");
+  });
+          
+ /***********************************************************************************************
+ *
+ *  Notification
+ *
+ ***********************************************************************************************/
+
+  var strTitle = " OMG";
+  var strBody = " need to workout";
+  var strIcon = "../img/run.jpg"; 
+  const HR = 3600000;
+  const MIN = 60000;
+
+
+  function notifyMe() {
+    //check if notification is supported by broswer
+    if (!("Notification" in window)) {
+      alert("This browser does not support system notifications");
+    }
+
+    // Let's check whether notification permissions have already been granted
+    else if (Notification.permission === "granted") {
+      // If it's okay let's create a notification
+      //var notification = new Notification("Hi there!");
+      createNotification();
+    }
+
+    // Otherwise, we need to ask the user for permission
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+            //var notification = new Notification("Hi there!");
+            createNotification();
+        }
+      });
+    }
+  }
+
+  // create new notification
+  function createNotification(){
+    var note = {
+        body: strBody,
+        icon: strIcon
+    }
+    var n = new Notification(strTitle, note);
+    n.onclick = function(){
+        // should be modify to go to notification page instead
+        document.location='list.html';
+    }
+    setTimeout(n.close.bind(n), 5000);
+  }
+
+  function setAutomatedNotification(hours, minutes){
+
+    var interval = hours*HR + minutes*MIN;
+    /*
+    var timestamp = new Date().getTime();
+    interval = days*DAY + hours*HR + minutes*MIN;
+    timestamp+= interval; 
+    timestamp = new Date(timestamp);
+
+    var timenow = new Date().getNow();
+    if( timenow >= timestamp){
+        createNotification()	
+    }*/
+    var displayNotification = setInterval(createNotification(), interval);
+
+  }
+  function stopAutomatedNotification(habitCleared){
+    clearInterval(habitCleared);
+  }
+
+
+              /*
+                      function show(){
+
+                          var instance = new Notification(
+                                  "NOTIFICATION",{
+                                      body: "NEED TO WORKOUT",
+                                      icon: strIcon
+                          });       
+                          instance.onclick = function () {
+                              //alert('onclick in show');
+                              document.location='list.html';
+                          };
+                          instance.onerror = function () {  
+                              alert("notification not working");
+                          };
+                          instance.onshow = function () {
+                          };
+                          instance.onclose = function () {
+                              alert("NEED TO WORKOUT! DONT HIDE!")
+                          };
+                          setTimeout(instance.remove(), 5000);
+                              return false;
+                      }                
+
+
+
+				*/
+
 		
+/***********************************************************************************************
+ *
+ *  Timing constraint in nofication interval input
+ *
+ ***********************************************************************************************/
 		
-				<p><label>Daily Frequency</label></p>
-				<div id="daily-button">
-					<label> <input type="radio" name="frequencyPerDay" value="1"><span>1</span></label>
-					<label> <input type="radio" name="frequencyPerDay" value="2"><span>2</span></label>
-					<label> <input type="radio" name="frequencyPerDay" value="3"><span>3</span></label>
-					<span id="times">times</span>
-				</div>
-				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
-                
-                <div id="spin"></div>
-                <p>Upload picture: <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload"></p>
-                
-                <br/>
-                
-                <img class="pano" id="pano" />
-				<p id="save_p"><input id="save" type="button" value="Save It"></p>
-				
-			</form>
 
-		</div>
-		<script>
-            
-            /***Global Variables***/
-            var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
-            var selectedIcon = 'sleep.jpg';//start with add-icon picture, by default
-            
-			function selectImage(name) {
-				//Clear all the other effects
-				document.getElementById('icon1').style.border = "none";
-				document.getElementById('icon2').style.border = "none";
-				document.getElementById('icon3').style.border = "none";
-				var image = document.getElementById(name);
-				image.style.border = "5px solid #42A5F5";
-                
-                var srcArray = image.src.split('/');
-                var src = srcArray[srcArray.length - 1]
-                
-                //save current selected icon
-                selectedIcon = src;
-			}
-            
-            $('#save').click(function(event) {
-                
-                //Get element information
-                var name = $('#title').val();
-                var text = $('#others').val();
-                
-                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                
-                var daysOfWeek = {};
-                var checkedValues = document.getElementsByName('dayOfTheWeek');
-                
-                for(var i=0, n=checkedValues.length; i<n ; i++)
-                {
-                    if(checkedValues[i].checked)
-                        {
-                            daysOfWeek[days[i]] = 'yes';
-                        }
-                    else
-                        {
-                            daysOfWeek[days[i]] = 'no';
-                        }
-                }
- 
-                var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
-                
-                var habitNameInput = document.getElementById('title').value;
-                var habitOtherInput = document.getElementById('others').value;
-                
-                var currentTime = Date.now();
-                if (!Date.now) {
-                    Date.now = function() { return new Date().getTime(); }
-                }
+  function isNumberInHour(input){
+      if( input.value < 0) input.value = 0;
+      if( input.value > 23) input.value = 23;
+  }
 
-               if(/[^a-zA-Z0-9_\-\ /]/.test( habitOtherInput ))
-                {
-                    alert('Input must be alphanumeric. Please remove non-alphanumeric symbols to continue.');
-                }
-               else if(/[^a-zA-Z0-9\-\ /]/.test( habitNameInput ))
-                {
-                    alert('Input must be alphanumeric. Please remove non-alphanumeric symbols to continue.');
-                }
-               else
-               {
-                   //make firebase object and push it to DB
-                   myDataRef.push({
-                        habitData: {name: name, text: text, 'iconId': selectedIcon,
-                        daysOfWeek: daysOfWeek,
-                        frequencyPerDay: frequencyPerDay,
-                        'settings': {'turnoff': '0', 'sleep':'0','pause':'0'},
-                        'habitProgress':{'counter': '0', 'maxRecord':'1'}, 
-                        'timestamp': currentTime}
-                   });
-                    
-                    document.location='list.html';
-               } 
-            });
-            
-            $(document).ready(function() {
-                //event.preventDefault(); //prevent submit: for testing purposes
-                //alert("End.");
-            });
-		</script>
-	</body>
+  function isNumberInMin(input){
+      if( input.value < 0) input.value = 0;
+      if( input.value > 59) input.value = 59;
+  } 
+        
+          
+  </script>
+  <div id="button-box">
+      <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+  </div> 
+  <hr style="height:100px;border-width:0">
+</body>
 </html>

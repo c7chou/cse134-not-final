@@ -5,24 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/list.css">
+    <link rel="stylesheet" type="text/css" href="../css/box.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/log.css">
     <script src="../js/firebase.js"></script>
     <script src="../js/jquery.js"></script>
+    <script src="../js/not.js"></script>
+    <script src="../js/log.js"></script>
+    
 </head>
 <body>
+    <div class="notification-box" id="not">
+        <div class="notification-message">
+            <button type="button" class="close" onclick="end()">×</button>
+            <button type="button" class="settings" onclick="set()">
+                <i class="fa fa-list-ol"></i>
+            </button>
+            <p>Come Check Back in on Your Habits!</p>
+        </div>
+    </div>
+    <div class="log-box" id="log">
+        <div class="log-message">
+            <button type="button" class="log-button" onclick="logout_no()">NO</button>
+            <button type="button" class="log-button" onclick="logout_yes()">YES</button>
+            <p>Are you sure you want to log out?</p>
+        </div>
+    </div>
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
             
-        </ul>     
+        </ul>
     </section>
-    <a href="setting.html">Settings</a>
     
-    
-
-    <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
+    <div id="overlay" class="overlay">
+      
+      <div id="deleteOverlay" class="deleteOverlay">
+        <h2>Are you sure?</h2>
+        <div class="buttons">
+          <input class="yesDeleteButton" type="button" value="Yes" onclick="deleteConfirmed(child)">
+          <input class="noDeleteButton" type="button" value="No" onclick="deleteOverlay()">
+        </div>
+      </div>
+      
+      <div id="editOverlay" class="editOverlay">
+        <h2>Are you sure?</h2>
+        <div class="buttons">
+          <input class="yesEditButton" type="button" value="Yes" onclick="editConfirmed()">
+          <input class="noEditButton" type="button" value="No" onclick="editOverlay()">
+        </div>
+      </div>
+    </div>
     
     <script type="text/javascript">
-        
         /*******Global variables**************/
         //reference to firebase
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
@@ -39,7 +74,7 @@
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             
-            var msgTotal = (msgElement.getElementsByTagName("svg"))[0];
+            var values = (msgElement.getElementsByTagName("strong"));
             var lines = (msgElement.getElementsByTagName("line"));
             
             
@@ -64,14 +99,26 @@
                 }
                 habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
                 //alert(JSON.stringify(currentData));
+<<<<<<< HEAD
+=======
+                
+                // TODO TODO COMBINE THIS AND THE ABOVE IF STATEMENT
+                if(currentData.maxRecord > currentData.counter){
+                    // UPDATE the number of times done that day
+                    // if(number of times == needed to be done a day, then update) 
+                    lines[0].setAttribute("x2", (currentData.counter+1)/currentData.maxRecord*150);
+                    lines[1].setAttribute("x1", (currentData.counter+1)/currentData.maxRecord*150);
+                    
+                    values[0].innerHTML = currentData.counter+1;
+                    values[1].innerHTML = currentData.maxRecord;
+                }else{
+                    // UPDATE MAX NUMBER
+                }
+>>>>>>> 8a1e9536450b32a704b1ad27818010cc32b38eed
             });
             
             // TODO algorithm to determine how much the line should increase
-            if(parseInt(lines[0].getAttribute("x2")) < 150){
-                lines[0].setAttribute("x2", parseInt(lines[0].getAttribute("x2"))+10);
-                lines[1].setAttribute("x1", parseInt(lines[1].getAttribute("x1"))+10);
-                // TODO also update the current number
-            }
+            
             
             msgElement.style.visibility="visible";
         }
@@ -96,13 +143,13 @@
             settingsRef.transaction(function(currentData)
             {
     
-                if(currentData.pause === '1')          
+                if(currentData.pause === '1')
                 {
                     play = false;
                 }
                 else
                 {
-                    play = true;    
+                    play = true;
                 }
             });
         
@@ -114,13 +161,13 @@
                 }
                 
                 thisList.style.opacity = "0.5";
-                element.src = "../img/play.png"; 
+                element.src = "../img/play.png";
                 play=false;
                 
                 settingsRef.transaction(function(currentData)
                 {
                     settingsRef.update({pause: '1'});
-                    //alert(JSON.stringify(currentData));   
+                    //alert(JSON.stringify(currentData));
                 });
             }
             else
@@ -143,10 +190,13 @@
         }
 
         //Deletes habit from page and Db
-        function deleteHabit(element){
+        function getChild(element){
             var child = element.parentNode.parentNode;
+            return child;
+        }
+        
+        function deleteHabit(child){
             var parent = child.parentNode;
-            
             //delete habit from DB
             var id = child.getAttribute('id');
             var deleteHabitRef = buildEndPoint(id);
@@ -154,7 +204,7 @@
                               
             parent.removeChild(child);
             
-            //alert(parent.nodeName);    
+            //alert(parent.nodeName);
         }
         
         function buildEndPoint (key) {
@@ -174,6 +224,30 @@
             document.location='edit.html?' + habitId;
         }
         
+        function deleteOverlay() {
+        	var el = document.getElementById("deleteOverlay");
+          var la = document.getElementById("overlay");
+          la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
+          el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+        }
+        
+        function deleteConfirmed(child){
+          deleteOverlay();
+          deleteHabit(child);
+        }
+        
+        function editOverlay() {
+        	var el = document.getElementById("editOverlay");
+          var la = document.getElementById("overlay");
+          la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
+          el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+        }
+        
+        function editConfirmed(){
+          editOverlay();
+          editHabit(this);
+        }
+        
         function displayHabit(name, text, key, iconId, habitProgress) {
             
             $('#habit-list').append(
@@ -185,7 +259,7 @@
                 '</ul>' +
                 '<div class=\"message\">' +
                     '<span class=\"message-total\">' +
-                        '<strong>48</strong> days in a row! Best Record: <strong>60</strong><br>' +
+                        '<strong>' + habitProgress['counter'] + '</strong> days in a row! Best Record: <strong>' + habitProgress['maxRecord'] + '</strong><br>' +
                         '<svg height=\"25\" width=\"150\">' +
                             '<line x1=\"0\" y1=\"0\" x2=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y2=\"0\" style=\"stroke:rgba(65, 131, 215, 0.8);stroke-width:25\" />' +
                             '<line x1=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y1=\"0\" x2=\"'+150+'\" y2=\"0\" style=\"stroke:rgba(171,171,171,0.6);stroke-width:25\" />' +
@@ -200,7 +274,7 @@
                     '<button type=\"button\" class=\"op op-edit\" onclick=\"editHabit(this);\" title=\"edit habit\">' +
                         '<img src=\"../img/edit.svg\" alt=\"Edit\">' +
                     '</button>' +
-                    '<button type=\"button\" class=\"op op-del\" onclick=\"deleteHabit(this);\" title=\"delete habit\">' +
+                    '<button type=\"button\" class=\"op op-del\" onclick=\"child = getChild(this); deleteOverlay()\" title=\"delete habit\">' +
                         '<img src=\"../img/delete.svg\" alt=\"Del\">' +
                     '</button>' +
                 '</div>' +
@@ -209,7 +283,7 @@
                         '<img id=\"img'+key+'\" style=\"position:absolute; top: -60px;\" src=\"../img/pause.jpe\" alt=\"Pause\" height=\"150\" width=\"150\" onclick=\"pausePlayHabit(this);\">' +
                     //'</button>' +
                 '</div>' +
-            '</li>'            
+            '</li>'
             );
             //alert(JSON.stringify($('#'+key)));
             //return $('#'+key);
@@ -299,16 +373,24 @@
                 if($pause.css("display")=="none")
                 {
                     $(this).animate({"left":"-=100px"}, "fast");
-                    $(this).find(".pause").show("fast");   
+                    $(this).find(".pause").show("fast");
                 }
                 else
                 {
                     $(this).animate({"left":"+=100px"}, "fast");
-                    $(this).find(".pause").hide("fast");  
+                    $(this).find(".pause").hide("fast");
                 }
             });
         });
            
     </script>
+    <div id="button-box">
+        <button type="button" id="notification" title="view notification" onclick="window.location = 'setting.html'"><i class="fa fa-cog"></i></button>
+
+        <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
+            
+        <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+    </div>
+    <hr style="height:100px;border-width:0">
 </body>
 </html>
