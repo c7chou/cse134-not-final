@@ -149,8 +149,9 @@
     var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
 
     var habitNameInput = document.getElementById('title').value;
-    var habitOtherInput = document.getElementById('others').value;
-
+    var habitOtherInput = document.getElementById('others').value;      
+    habitOtherInput = Number(habitOtherInput);
+      
     /* notification variable */ 
 
     var notiHour = document.getElementById("notificationHours").value;
@@ -199,6 +200,18 @@
       }
     }
 
+    if ((frequencyPerDay == undefined) && (habitOtherInput < 1)){
+      daily_ex.style.display = 'block';
+      daily_freq.style.color = 'red';
+      return;
+    }
+      
+    if ((frequencyPerDay == undefined) && (isNaN(habitOtherInput))){
+      daily_ex.style.display = 'block';
+      daily_freq.style.color = 'red';
+      return;
+    }
+       
     if (frequencyPerDay == undefined)
       frequencyPerDay = habitOtherInput;
 
