@@ -7,11 +7,16 @@
 
         //doing the math and if time then send the alert
         function timeToNotify(){
-            var date = Date();
-            var hour = date.slice(16,18);
-            var el = document.getElementById("not");
-            if (Number(hour) >= hourToCheck)
-                el.style.display = 'block';
+          var date = Date();
+          var hour = date.slice(16,18);
+          var el = document.getElementById("not");
+          if (Number(hour) >= hourToCheck)
+            el.style.display = 'block';
+        }
+
+        //function to check which habits to display notifications for
+        function notToDisplay(){
+          
         }
 
         //used to reset the interval
@@ -44,6 +49,10 @@
             //window.alert("clicked the x");
             var el = document.getElementById("not");
             el.style.display = 'none';
+        }
+
+        function list(){
+          window.location = '../src/list.html';
         }
 
         //setting the interval
