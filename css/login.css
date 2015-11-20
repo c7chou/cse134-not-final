@@ -283,7 +283,7 @@ body {
 .signUpOverlay .loginForm p {
 	display: none;
 	text-align: center;
-	color: #333;
+	color: red;
 }
 
 .signUpOverlay .loginForm .buttons {
@@ -406,6 +406,12 @@ body {
 	-webkit-transition: bottom 1s, height 0.5s;
 	transition: bottom 1s, height 0.5s;
   -webkit-appearance:none;
+}
+
+.forgotOverlay .loginForm p {
+	display: none;
+	text-align: center;
+	color: red;
 }
 
 .forgotOverlay .loginForm .forgotButton {

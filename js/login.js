@@ -10,13 +10,32 @@ function invalidEmail() {
   signUpText.style.display = "block";
 }
 
+function invalidForgotEmail() {
+  document.getElementById("checkEmail").innerHTML = "Enter valid Email";
+    var signUpText = document.getElementById("checkEmail");
+  signUpText.style.display = "block";
+}
+
+function invalidNewPassword() {
+  document.getElementById("checkPassword").innerHTML = "Password cannot be empty!";
+  var signUpText = document.getElementById("checkPassword");
+  signUpText.style.display = "block";
+}
+
+function invalidSignUpEmail() {
+  document.getElementById("checkPassword").innerHTML = "Enter valid Email!";
+    var signUpText = document.getElementById("checkPassword");
+  signUpText.style.display = "block";
+}
+
 function onClickForgot() {
   var resendText = document.getElementById("resendMessage");
   resendText.style.display = "block";
 }
 
 function onWrongPassword(){
-  var checkPassword = document.getElementById("checkPassword")
+  document.getElementById("checkPassword").innerHTML = "Passwords must match!";
+  var checkPassword = document.getElementById("checkPassword");
   checkPassword.style.display = "block";
 }
 
@@ -28,7 +47,7 @@ function isPasswordMatch(){
    onWrongPassword();
   }
   else{
-   signUpConfirm();
+	document.location.href = 'welcome.html';
   }
   
 }
@@ -50,6 +69,34 @@ function validatePassword(){
 	}
 	else
 		document.location.href = 'list.html';
+}
+
+function validateSignUpEmail() {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var email = document.getElementById("signUpUsermail").value;
+	if (re.test(email))
+		validateSignUpPassword();
+	else
+		invalidSignUpEmail();
+}
+
+function validateSignUpPassword(){
+	var pass = document.getElementById("newPassword").value;
+	if (pass === "")
+	{
+		invalidNewPassword();
+	}
+	else
+		isPasswordMatch();
+}
+
+function validateForgotEmail() {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var email = document.getElementById("forgotUsermail").value;
+	if (re.test(email))
+		forgotConfirm();
+	else
+		invalidForgotEmail();
 }
 
 function signUpConfirm(){
