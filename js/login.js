@@ -1,5 +1,12 @@
-function onClickSignUp() {
+function invalidPassword() {
+  document.getElementById("signInMessage").innerHTML = "Password cannot be empty";
   var signUpText = document.getElementById("signInMessage");
+  signUpText.style.display = "block";
+}
+
+function invalidEmail() {
+  document.getElementById("signInMessage").innerHTML = "Enter valid Email";
+    var signUpText = document.getElementById("signInMessage");
   signUpText.style.display = "block";
 }
 
@@ -26,9 +33,29 @@ function isPasswordMatch(){
   
 }
 
+function validateEmail() {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var email = document.getElementById("usermail").value;
+	if (re.test(email))
+		validatePassword();
+	else
+		invalidEmail();
+}
+
+function validatePassword(){
+	var pass = document.getElementById("password").value;
+	if (pass === "")
+	{
+		invalidPassword();
+	}
+	else
+		document.location.href = 'list.html';
+}
+
 function signUpConfirm(){
-  onClickSignUp();
+//  onClickSignUp();
   signUpOverlay();
+  document.location.href = 'welcome.html';
 }
 
 function forgotConfirm(){

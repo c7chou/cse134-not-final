@@ -28,7 +28,7 @@
   <h2>Add A Habit</h2>
   <form>
     <p><label><span id="title_text"><i style="display:none" id="title_ex" class="fa fa-exclamation"></i>Habit Title</span></label></p>
-    <p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes"></p>
+    <p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes" maxlength="27"></p>
     <p><label>Habit Icon</label></p>
     <img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
     <img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
@@ -149,8 +149,9 @@
     var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
 
     var habitNameInput = document.getElementById('title').value;
-    var habitOtherInput = document.getElementById('others').value;
-
+    var habitOtherInput = document.getElementById('others').value;      
+    habitOtherInput = Number(habitOtherInput);
+      
     /* notification variable */ 
 
     var notiHour = document.getElementById("notificationHours").value;
@@ -199,6 +200,18 @@
       }
     }
 
+    if ((frequencyPerDay == undefined) && (habitOtherInput < 1)){
+      daily_ex.style.display = 'block';
+      daily_freq.style.color = 'red';
+      return;
+    }
+      
+    if ((frequencyPerDay == undefined) && (isNaN(habitOtherInput))){
+      daily_ex.style.display = 'block';
+      daily_freq.style.color = 'red';
+      return;
+    }
+       
     if (frequencyPerDay == undefined)
       frequencyPerDay = habitOtherInput;
 
@@ -250,128 +263,9 @@
       //event.preventDefault(); //prevent submit: for testing purposes
       //alert("End.");
   });
-          
- /***********************************************************************************************
- *
- *  Notification
- *
- ***********************************************************************************************/
 
-  var strTitle = " OMG";
-  var strBody = " need to workout";
-  var strIcon = "../img/run.jpg"; 
-  const HR = 3600000;
-  const MIN = 60000;
-
-
-  function notifyMe() {
-    //check if notification is supported by broswer
-    if (!("Notification" in window)) {
-      alert("This browser does not support system notifications");
-    }
-
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      //var notification = new Notification("Hi there!");
-      createNotification();
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== 'denied') {
-      Notification.requestPermission(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-            //var notification = new Notification("Hi there!");
-            createNotification();
-        }
-      });
-    }
-  }
-
-  // create new notification
-  function createNotification(){
-    var note = {
-        body: strBody,
-        icon: strIcon
-    }
-    var n = new Notification(strTitle, note);
-    n.onclick = function(){
-        // should be modify to go to notification page instead
-        document.location='list.html';
-    }
-    setTimeout(n.close.bind(n), 5000);
-  }
-
-  function setAutomatedNotification(hours, minutes){
-
-    var interval = hours*HR + minutes*MIN;
-    /*
-    var timestamp = new Date().getTime();
-    interval = days*DAY + hours*HR + minutes*MIN;
-    timestamp+= interval; 
-    timestamp = new Date(timestamp);
-
-    var timenow = new Date().getNow();
-    if( timenow >= timestamp){
-        createNotification()	
-    }*/
-    var displayNotification = setInterval(createNotification(), interval);
-
-  }
-  function stopAutomatedNotification(habitCleared){
-    clearInterval(habitCleared);
-  }
-
-
-              /*
-                      function show(){
-
-                          var instance = new Notification(
-                                  "NOTIFICATION",{
-                                      body: "NEED TO WORKOUT",
-                                      icon: strIcon
-                          });       
-                          instance.onclick = function () {
-                              //alert('onclick in show');
-                              document.location='list.html';
-                          };
-                          instance.onerror = function () {  
-                              alert("notification not working");
-                          };
-                          instance.onshow = function () {
-                          };
-                          instance.onclose = function () {
-                              alert("NEED TO WORKOUT! DONT HIDE!")
-                          };
-                          setTimeout(instance.remove(), 5000);
-                              return false;
-                      }                
-
-
-
-				*/
-
-		
-/***********************************************************************************************
- *
- *  Timing constraint in nofication interval input
- *
- ***********************************************************************************************/
-		
-
-  function isNumberInHour(input){
-      if( input.value < 0) input.value = 0;
-      if( input.value > 23) input.value = 23;
-  }
-
-  function isNumberInMin(input){
-      if( input.value < 0) input.value = 0;
-      if( input.value > 59) input.value = 59;
-  } 
-        
-          
   </script>
+  <script src="../js/add.js"></script>
   <div id="button-box">
       <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
   </div> 

@@ -1,9 +1,4 @@
 /*style for the notifications */
-/* use this for the padding on sides of bar */
-        .notification-box {
-            display: none;
-        }
-        
         /* check how this looks on other browsers and then fix up all
          * these background setting statements
          */
@@ -89,6 +84,7 @@
         }
 
         .notification-message p {
+            text-align: center;
             color: #ffffff;
             margin-bottom: 0;
             margin: 0;
@@ -192,7 +188,7 @@ body{
 /*                Overlay CSS      */
 #overlay {
      visibility: hidden;
-     position: absolute;
+     position: fixed;
      left: 0;
      top: 0;
      width:100%;

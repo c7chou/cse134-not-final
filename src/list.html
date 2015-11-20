@@ -12,15 +12,15 @@
     <script src="../js/jquery.js"></script>
     <script src="../js/not.js"></script>
     <script src="../js/log.js"></script>
-    
+
 </head>
 <body>
-    <div class="notification-box" id="not">
+    <div class="notification-box" id="not" onclick="set()">
         <div class="notification-message">
-            <button type="button" class="close" onclick="end()">×</button>
+            <!--<button type="button" class="close" onclick="end()">×</button>
             <button type="button" class="settings" onclick="set()">
                 <i class="fa fa-list-ol"></i>
-            </button>
+            </button> -->
             <p>Come Check Back in on Your Habits!</p>
         </div>
     </div>
@@ -34,12 +34,12 @@
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
-            
+
         </ul>
     </section>
-    
+
     <div id="overlay" class="overlay">
-      
+
       <div id="deleteOverlay" class="deleteOverlay">
         <h2>Are you sure?</h2>
         <div class="buttons">
@@ -47,7 +47,7 @@
           <input class="noDeleteButton" type="button" value="No" onclick="deleteOverlay()">
         </div>
       </div>
-      
+
       <div id="editOverlay" class="editOverlay">
         <h2>Are you sure?</h2>
         <div class="buttons">
@@ -56,13 +56,13 @@
         </div>
       </div>
     </div>
-    
+
     <script type="text/javascript">
         /*******Global variables**************/
         //reference to firebase
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
         var progressData;
-        
+
         function httpGet(theUrl)
         {
             var xmlHttp = new XMLHttpRequest();
@@ -70,25 +70,25 @@
             xmlHttp.send( null );
             return xmlHttp.responseText;
         }
-        
+
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
-            
+
             var values = (msgElement.getElementsByTagName("strong"));
             var lines = (msgElement.getElementsByTagName("line"));
-            
-            
-            
+
+
+
             //Update the counter for the progress bar
             var habitKey = element.parentElement.parentElement.id;
-            
+
             //alert('fadfa');
             //var respond = httpGet('https://jjb750uy9yj.firebaseio-demo.com/habits/' + habitKey+ '/habitData/habitProgress.json');
             //alert(respond);
-            
-            
+
+
             var habitProgressRef = myDataRef.child(habitKey + '/habitData/habitProgress/');
-                  
+
             habitProgressRef.transaction(function(currentData)
             {
                 //alert(JSON.stringify(currentData));
@@ -99,47 +99,46 @@
                 }
                 habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
                 //alert(JSON.stringify(currentData));
-                
                 // TODO TODO COMBINE THIS AND THE ABOVE IF STATEMENT
                 if(currentData.maxRecord > currentData.counter){
                     // UPDATE the number of times done that day
-                    // if(number of times == needed to be done a day, then update) 
+                    // if(number of times == needed to be done a day, then update)
                     lines[0].setAttribute("x2", (currentData.counter+1)/currentData.maxRecord*150);
                     lines[1].setAttribute("x1", (currentData.counter+1)/currentData.maxRecord*150);
-                    
+
                     values[0].innerHTML = currentData.counter+1;
                     values[1].innerHTML = currentData.maxRecord;
                 }else{
                     // UPDATE MAX NUMBER
                 }
             });
-            
+
             // TODO algorithm to determine how much the line should increase
-            
-            
+
+
             msgElement.style.visibility="visible";
         }
-        
+
         //Pauses the habit
         function pausePlayHabit(element){
             /* grab from database if it is play or pause. store as variable then check change play/pause */
             //alert(element.tagName);
             var thisList = (element.parentNode.parentNode);
             var habitElement = (thisList.getElementsByClassName("habit-op"))[0];
-            
+
             //Get ref to update setting pause
             var habitKey = element.parentElement.parentElement.id;
             var settingsRef = myDataRef.child(habitKey + '/habitData/settings/');
 
             var button = habitElement.getElementsByTagName("button");
             event.stopPropagation();//stops event listener of parent nodes.
-            
+
             //getting current state of habit, pause or unpaused
             var play;
-            
+
             settingsRef.transaction(function(currentData)
             {
-    
+
                 if(currentData.pause === '1')
                 {
                     play = false;
@@ -149,18 +148,18 @@
                     play = true;
                 }
             });
-        
+
             if(play)
             {
                 for(i=0;i<button.length;i++)
                 {
                     button[i].setAttribute("disabled",true);
                 }
-                
+
                 thisList.style.opacity = "0.5";
                 element.src = "../img/play.png";
                 play=false;
-                
+
                 settingsRef.transaction(function(currentData)
                 {
                     settingsRef.update({pause: '1'});
@@ -174,11 +173,11 @@
                 {
                     button[i].removeAttribute("disabled");
                 }
-                
+
                 thisList.style.opacity = "1";
                 element.src = "../img/pause.jpe";
                 play=true;
-                
+
                 settingsRef.transaction(function(currentData)
                 {
                     settingsRef.update({pause: '0'});
@@ -191,23 +190,23 @@
             var child = element.parentNode.parentNode;
             return child;
         }
-        
+
         function deleteHabit(child){
             var parent = child.parentNode;
             //delete habit from DB
             var id = child.getAttribute('id');
             var deleteHabitRef = buildEndPoint(id);
             deleteHabitRef.remove();
-                              
+
             parent.removeChild(child);
-            
+
             //alert(parent.nodeName);
         }
-        
+
         function buildEndPoint (key) {
             return new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/' + key);
         }
-        
+
         var getKeys = function(obj){
            var keys = [];
            for(var key in obj){
@@ -215,40 +214,40 @@
            }
            return keys;
         }
-                    
+
         function editHabit (element){
             var habitId = element.parentNode.parentNode.id;
             document.location='edit.html?' + habitId;
         }
-        
+
         function deleteOverlay() {
         	var el = document.getElementById("deleteOverlay");
           var la = document.getElementById("overlay");
           la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
           el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
         }
-        
+
         function deleteConfirmed(child){
           deleteOverlay();
           deleteHabit(child);
         }
-        
+
         function editOverlay() {
         	var el = document.getElementById("editOverlay");
           var la = document.getElementById("overlay");
           la.style.visibility = (la.style.visibility == "visible") ? "hidden" : "visible";
           el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
         }
-        
+
         function editConfirmed(){
           editOverlay();
           editHabit(this);
         }
-        
+
         function displayHabit(name, text, key, iconId, habitProgress) {
-            
+
             $('#habit-list').append(
-            
+
             '<li class=\"slider\" id=\"'+ key +'\">' +
                 '<ul class=\"habit-info\">'+
                     '<li><div class=\"habit-name\">'+name+'</div></li>' +
@@ -287,12 +286,12 @@
         };
 
         /*
-        
+
         function displayPausedHabit(name, text, key, iconId, habitProgress) {
-            
+
             $('#habit-list').append(
-            
-                
+
+
                 <li class="slider" id="-K2tkyfzJG4mIHL9W7jz" style="opacity: 0.5; left: 0px;">
    <ul class="habit-info">
       <li>
@@ -313,27 +312,27 @@
    <div class="habit-op"><button type="button" class="op op-done" onclick="showMsg(this);" title="done" disabled="true"><img src="../img/done.svg" alt="Done"></button><button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit" disabled="true"><img src="../img/edit.svg" alt="Edit"></button><button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit" disabled="true"><img src="../img/delete.svg" alt="Del"></button></div>
    <div class="pause" style="position: relative; left: 545px; bottom: 50px; display: none;"><img id="img-K2tkyfzJG4mIHL9W7jz" style="position:absolute; top: -60px;" src="../img/play.png" alt="Pause" height="150" width="150" onclick="pausePlayHabit(this);"></div>
 </li>
-                      
+
             );
         };
-        
+
         */
-        
+
 
         $(document).ready(function() {
-            
+
             //Keep a mapping of firebase locations to HTML elements in order to remove or move elements
             var habitObject = {};
             var habitList = [];
-        
+
             //fired upon child added to
             myDataRef.on('child_added', function(snapshot) {
                 var data = snapshot.val().habitData;
                 var habitKey = snapshot.name();
                 //alert(JSON.stringify(data));
-                
+
                 //saving progress data for counter updates when user confirms their habit for the day is complete
-                
+
                 if(data.hasOwnProperty('name')){
                     name = data.name ? data.name : '';
                     if(name.trim().length > 0)
@@ -342,12 +341,12 @@
                             habitObject[habitKey] = name;
                         }
                 }
-                
+
                 //alert(data.settings.turnoff);
                 if(data.settings.turnoff === '0')
                 {
                     displayHabit(data.name, data.text, habitKey, data.iconId, data.habitProgress);
-                    
+
                     //alert(data.settings.pause);
                     if(data.settings.pause === '1' )
                         {
@@ -357,7 +356,7 @@
                         }
                 }
             });
-            
+
             //Makes slider go right
             $(document).on('click', '.habit-op', function(event){
                 event.stopPropagation();
@@ -366,7 +365,7 @@
             $(document).on('click', '.slider', function(evt){
                 //alert("I got clicked!");
                 var $pause = $(this).find(".pause");
-                
+
                 if($pause.css("display")=="none")
                 {
                     $(this).animate({"left":"-=100px"}, "fast");
@@ -379,13 +378,13 @@
                 }
             });
         });
-           
+
     </script>
     <div id="button-box">
         <button type="button" id="notification" title="view notification" onclick="window.location = 'setting.html'"><i class="fa fa-cog"></i></button>
 
         <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
-            
+
         <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
     </div>
     <hr style="height:100px;border-width:0">

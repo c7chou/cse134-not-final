@@ -33,7 +33,7 @@
        	<p id="signInMessage">Successfully created new account! Login! <span style="color: #4caf50">&#10004;</span></p>
        	<p id="resendMessage">Your password has been sent <span style="color: #4caf50">&#10004;</span></p>
        	<div class="buttons">
-       		<input class="loginButton" type="button" value="Login" onclick="location.href='welcome.html'">
+       		<input class="loginButton" type="button" value="Login" onclick="validateEmail()">
           <input class="signUpButton" type="button" value="Signup" onclick="signUpOverlay()">
         </div>
       </form>
@@ -42,7 +42,7 @@
 
     <div id="overlay" class="overlay">
       <div id="signUpOverlay" class="signUpOverlay">
-        <h2>Create a new account</h2>
+        <div id="signUpBanner" class="signUpBanner"> <h2>Create a new account</h2></div>
         
         <form class="loginForm" action="index_submit" method="get" accept-charset="utf-8">
       	<table>
@@ -81,7 +81,7 @@
       </div>
       
       <div id="forgotOverlay" class="forgotOverlay">
-        <h3>Forgot Password?</h3>
+        <div id="forgotBanner" class="forgotBanner"> <h3>Forgot Password?</h3> </div>
         
         <form class="loginForm" action="index_submit" method="get" accept-charset="utf-8">
        	<table>

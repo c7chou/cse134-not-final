@@ -128,7 +128,7 @@
                 $('#edit-form').append(
                     
     '<p><label><span id=\"title_text\"><i style=\"display:none\" id=\"title_ex\" class=\"fa fa-exclamation\"></i>Habit Title</span></label></p>' +
-    '<p><input id=\"title\" type=\"text\" name=\"fullname\" value=\"'+name+'\"></p>' +
+    '<p><input id=\"title\" type=\"text\" name=\"fullname\" value=\"'+name+'\" maxlength="27"></p>' +
     '<p><label>Habit Icon</label></p>' +
     '<img id=\"icon1\" class=\"icon\" onclick=\"selectImage(\'icon1\');\" src=\"../img/sleep.jpg\" alt=\"sleep image\"/>' +
     '<img id=\"icon2\" class=\"icon\" onclick=\"selectImage(\'icon2\');\" src=\"../img/salad.jpg\" alt=\"eat image\"/>' +
@@ -233,6 +233,7 @@
 
                var habitNameInput = document.getElementById('title').value;
                var habitOtherInput = document.getElementById('others').value;
+               habitOtherInput = Number(habitOtherInput);
              /* notification variable */
 
                var notiHour = document.getElementById("notificationHours").value;
@@ -274,6 +275,18 @@
                     daily_freq.style.color = 'red';
                     return;
                     }
+                }
+               
+               if ((frequencyPerDay == undefined) && (habitOtherInput < 1)){
+                daily_ex.style.display = 'block';
+                daily_freq.style.color = 'red';
+                return;
+                }
+      
+                if ((frequencyPerDay == undefined) && (isNaN(habitOtherInput))){
+                daily_ex.style.display = 'block';
+                daily_freq.style.color = 'red';
+                return;
                 }
                 
                 if (frequencyPerDay == undefined)

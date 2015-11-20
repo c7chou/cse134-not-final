@@ -1,24 +1,3 @@
-/***********************************************************************************************
-*
-*  select picture 
-*
-***********************************************************************************************/
-
-
-function selectImage(name) {
-	//Clear all the other effects
-	document.getElementById('icon1').style.border = "none";
-	document.getElementById('icon2').style.border = "none";
-	document.getElementById('icon3').style.border = "none";
-	var image = document.getElementById(name);
-	image.style.border = "5px solid #42A5F5";
-
-	var srcArray = image.src.split('/');
-	var src = srcArray[srcArray.length - 1]
-
-	//save current selected icon
-	selectedIcon = src;
-}
 
 
 /***********************************************************************************************
@@ -44,8 +23,7 @@ function isNumberInMin(input){
 *
 *  Notification
 *
-***********************************************************************************************/
-
+***********************************************************************************************
 
 // Once the service worker is registered set the initial state  
 function initialiseState() {  
@@ -106,7 +84,7 @@ function initialiseState() {
 *
 *  Notification
 *
-***********************************************************************************************/
+***********************************************************************************************
 
 function sub(){
 	var pushButton = document.querySelector('.notif');
@@ -260,10 +238,10 @@ self.addEventListener('push', function(event) {
 ***********************************************************************************************/
 
 
-/*
+
 var isPushEnabled = false;
 
-
+/*
 window.addEventListener('load', function() {  
 var pushButton = document.querySelector('.js-push-button');  
 pushButton.addEventListener('click', function() {  
@@ -272,18 +250,17 @@ pushButton.addEventListener('click', function() {
 	} else {  
 		subscribe();  
 	}  
-});
+});*/
 
 // Check that service workers are supported, if so, progressively  
 // enhance and add push messaging support, otherwise continue without it.  
-if ('serviceWorker' in navigator) {  
+/*if ('serviceWorker' in navigator) {  
 	navigator.serviceWorker.register('/service-worker.js')  
 	.then(initialiseState);  
 } else {  
 	console.warn('Service workers aren\'t supported in this browser.');  
 }  
-});
-*/
+});*/
 
 
 
@@ -293,7 +270,7 @@ var strIcon = "../img/run.jpg";
 const HR = 3600000;
 const MIN = 60000;
 
-/*
+
 function notifyMe() {
 	//check if notification is supported by broswer
 	if (!("Notification" in window)) {
@@ -338,7 +315,7 @@ function createNotification(){
 function setAutomatedNotification(hours, minutes){
 
 	var interval = hours*HR + minutes*MIN;
-	/*
+	
 	var timestamp = new Date().getTime();
 	interval = days*DAY + hours*HR + minutes*MIN;
 	timestamp+= interval; 
@@ -347,8 +324,8 @@ function setAutomatedNotification(hours, minutes){
 	var timenow = new Date().getNow();
 	if( timenow >= timestamp){
 			createNotification()	
-	}* /
-	var displayNotification = setInterval(createNotification(), interval);
+	}
+	var displayNotification = setInterval(createNotification, interval);
 
 }
 function stopAutomatedNotification(habitCleared){
