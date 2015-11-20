@@ -1,5 +1,34 @@
+APPLICATION FUNCTIONALITY
 
 
+Habit List
+We decided to keep our habit list the way it was because all habits are neatly presented in a list.
+Features in our habits include:
+	-click and slide:
+		Shows the option to pause and play a habit, which allows the user to put a habit on pause.
+	-Progess bar progression:
+		Click on the check button and the button progresses
+	-In adition we decided to add 2 extra buttons in the bottom of the page for the purpose of
+		easier navigation between pages
+	-Lastly, we felt the best place to put the notfication bar would be in the top of the habits list.
+		This carefully chosen location allows easy access to users in case they wish to see which habits
+		need to be updated.
+
+Settings Page
+	The settigns page has 3 features:
+		-Puase: pauses a habit and continues to show it in the main list.
+		-Turnoff: turns off the habit and removes it from the main list.
+			We believed this would be an important feature because the user has the option
+			to remove habits that are cluttering the main list, but don't necessarily have
+			to remove it permanently. As a result this feature serves to archive a habit.
+		-Sleep: essentially pauses a habit. (feature not working currently)
+
+
+Edit/Add Habbit
+	-Added features to the Add habit is that Image Uploads
+		User can add an image under 10 MB of size and it will show on the main page.
+	-Edit feature has all saved settings (currently there is an error for when user uploads an image, which
+		causes to not show previous settings.)
 
 Notification
 The notification works properly. Users are notified with a popup message and a redirection to the notification page. 
@@ -8,6 +37,11 @@ We could have implemented to make the notification appears with setting of inter
 Codes in commented region in add.js are for that purpose. Notifications are changed accordingly when setting of the notification on the setting pages change.
 Whenever a habit is created, it will appears on the notification page with a default of notification on. 
 
+
+
+
+
+TEAM CONTRIBUTIONS
 
 Chia-yu: 
 - implemented the notification page without database usage. 
@@ -22,36 +56,66 @@ Chia-yu:
 - README  
 	- notification section
 
-
-
-
-
+William Kuntz:
+-implemented the notifications page without database usage and the redirects and displaying of the notifications on the page with Chia-yu.
+-Added the notification task bar at the top of the list page to direct to the notifications page.
+-Implemented The Javascript to make the notifications show up and the timers needed in order to make them show up at the right time and go away once clicked, worked with Chia-yu on this.
+-Went through and did verification checks on the add/edit pages. these are used to make sure that the user had put input into the fields and didn’t leave them blank.
+-Implemented some minor error checking on the add/edit pages. These don’t just check that the fields were inputted but checked to make sure it had the right data inputted.
+-The validations and error checking were almost all javascript checks with just a couple additions of id’s for the css in order to show/manipulate the fields.
+-Implemented the logout buttons on all the pages. Including the javascript and the css for this. 
+-created a small box in order to house the logout button. On the list page it includes a couple other buttons as well, settings button, and add a habit button. This box is used so that when its in mobile view, it doesn’t float over the lists and other options on other pages.  
+-README 
 
 Oscar:
-Greatly assisted my team with development and debugging issues.
-Managed and assigned tasks to team
-Did a great portion of planning for the application, including UI and implementation
-Implemented all of the CRUD features including:
+-Greatly assisted my team with development and debugging issues.
+-Managed and assigned tasks to team
+-Did a great portion of planning for the application, including UI and implementation
+-Implemented all of the CRUD features including:
     1. Add habits, read habits, delete habits, Update habits
     2. Settings page add settings elements
     
-Implemented Settings page pause, sleep, and turnoff javascript that interacts with DB
-Implemented features that pause of turnoff a habit in the main list
-Debugged and fixed sliding effects in the mainlist and added play and pause picture (previous buttons not compatible with the UI look)
-Greatly assisted with the navbar in the bottom
-Connected progress bar with the backend in the DB
-Added security in input boxes that prevent injections in the add and edit page.
-Added the security popup that prevents user from entering inappropriate input to input boxes
-Implemented all the DB connections of the edit page that interact with the back end and affect the main list.
-Added the upload a photo feature including:
+-Implemented Settings page pause, sleep, and turnoff javascript that interacts with DB
+-Implemented features that pause of turnoff a habit in the main list
+-Debugged and fixed sliding effects in the mainlist and added play and pause picture (previous buttons not compatible with the UI look)
+-Greatly assisted with the navbar in the bottom
+-Connected progress bar with the backend in the DB
+-Added security in input boxes that prevent injections in the add and edit page.
+-Added the security popup that prevents user from entering inappropriate input to input boxes
+-Implemented all the DB connections of the edit page that interact with the back end and affect the main list.
+-Added the upload a photo feature including:
     1. photo storage in the backend
     2. photo input selection
-Added the appropriate redirects to most pages
-I made routing information possible from page to page using URL parameters
-README
+-Added the appropriate redirects to most pages
+-I made routing information possible from page to page using URL parameters
+-README
+
+Carlos:
+-Implemented all of the Overlays throughout the app.
+-Provided testing of the app to try and break it.
+-Worked exclusively on the login html, css, and js.
+- Changed the flow of the app to match the type of login they used.
+-Validated the login credentials
+	-Includes making sure no blank input is accepted
+	-email address provided is in the form of a proper email
+	-when using sign-up passwords need to match one another
+-Implemented updating the habits card when clicked on.
+	-When check is clicked, it displays message with current progress for habit as well as user chosen frequency for habit.
+	-Added a meter that updates everytime the habits page is called which shows what the current progress for the user is.
+	-(Plan to add functionality so that both of these update whenever the item is clicked.)
+-Limited the input length for habit titles so that they would not mess with the habit cards layout.
+-README
+
+Stephen:
+-worked on the sliding effects of the habit list
+-contributed to pause and play image.
 
 
-Notes:
+
+
+
+
+NOTES ON IMPLEMENTATION:
 
 Settings page to DB:
 
@@ -87,6 +151,3 @@ Bar Progress Bar
             iii. On page return, shows results
                 a. Logic for this would be to check timestamp of last updated and compare with current submission
                     Most practical approach.
-
-
-
