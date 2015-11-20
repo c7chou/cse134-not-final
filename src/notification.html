@@ -9,6 +9,7 @@
     <script src="../js/firebase.js"></script>
     <script src="../js/log.js"></script>
 		<script src="../js/not.js"></script>
+		<script src="../js/add.js"></script>
     <link rel="stylesheet" href="../css/log.css">
     <link rel="stylesheet" href="../css/box.css">
 </head>
@@ -47,6 +48,11 @@
         $(document).ready(function()
         {
             refData.on('child_added', function(snapshot){
+							
+							/** 
+							 notification 
+							 timing 
+							 */
 								var date = new Date();
 								var current_time = date.getTime();
 								var start_time = snapshot.val().habitData.timestamp;
@@ -60,6 +66,12 @@
 								habitupdate = refupdate.child('habitData');
 								habitupdateList[habitKey] = habitupdate;
 								var flag = snapshot.val().habitData.flag;
+								dataIcon = data.iconId;
+								dataName = data.name;
+								dataPause = data.settings.pause;
+								dataSleep = data.settings.sleep;
+								dataTurnoff = data.settings.turnoff;
+							
 
                 if(data.hasOwnProperty('name')){
                     name = data.name ? data.name : '';
@@ -69,8 +81,12 @@
                             habitNotObject[habitKey] = name;
                         }
                 }
-								if (((time_diff % interval) < 1) && flag)
-                	addNotificationforHabit(habitKey, name);
+								if (((time_diff % interval) < 1) && flag){
+									if((dataPause && dataSleep && dataTurnoff) == 0){
+                		addNotificationforHabit(habitKey, name);
+										createNotification(dataName, dataIcon);
+									}
+								}
             });
         });
 

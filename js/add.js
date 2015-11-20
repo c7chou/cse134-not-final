@@ -163,7 +163,7 @@ function unsubscribe() {
         }  
 
         var subscriptionId = pushSubscription.subscriptionId;  
-        // TODO: Make a request to your server to remove  
+        // make request from your server side 
         // the subscriptionId from your data store so you
         // don't attempt to send them push messages anymore
 
@@ -191,14 +191,6 @@ function unsubscribe() {
 
 
 
-
-
-
-
-
-
-
-
 self.addEventListener('push', function(event) {  
   console.log('Received a push message', event);
 	
@@ -217,11 +209,6 @@ self.addEventListener('push', function(event) {
     })  
   );  
 });
-
-
-
-
-
 
 
 
@@ -263,13 +250,10 @@ pushButton.addEventListener('click', function() {
 });*/
 
 
-
-var strTitle = " OMG";
-var strBody = " need to workout";
-var strIcon = "../img/run.jpg"; 
+/*
 const HR = 3600000;
 const MIN = 60000;
-
+*/
 
 function notifyMe() {
 	//check if notification is supported by broswer
@@ -281,9 +265,9 @@ function notifyMe() {
 	else if (Notification.permission === "granted") {
 		// If it's okay let's create a notification
 		//var notification = new Notification("Hi there!");
-		document.getElementById("notificationIntervalBar").style.visibility = "visible";
-		document.getElementById("noti-button").style.visibility = "hidden";
-		createNotification();
+		//document.getElementById("notificationIntervalBar").style.visibility = "visible";
+		//document.getElementById("noti-button").style.visibility = "hidden";
+		//createNotification();
 	}
 
 	// Otherwise, we need to ask the user for permission
@@ -292,26 +276,28 @@ function notifyMe() {
 			// If the user accepts, let's create a notification
 			if (permission === "granted") {
 					//var notification = new Notification("Hi there!");
-					createNotification();
+					//createNotification();
 			}
 		});
 	}
 }
 
+
 // create new notification
-function createNotification(){
+function createNotification(strTitle, sIcon){
+	var strBody = "Time to " + strTitle;
 	var note = {
 			body: strBody,
-			icon: strIcon
+			icon: sIcon
 	}
 	var n = new Notification(strTitle, note);
 	n.onclick = function(){
 			// should be modify to go to notification page instead
 			document.location='list.html';
 	}
-	setTimeout(n.close.bind(n), 5000);
+	setTimeout(n.close.bind(n), 1000);
 }
-
+/*
 function setAutomatedNotification(hours, minutes){
 
 	var interval = hours*HR + minutes*MIN;
@@ -331,35 +317,6 @@ function setAutomatedNotification(hours, minutes){
 function stopAutomatedNotification(habitCleared){
 	clearInterval(habitCleared);
 }
+*/
 
-
-						/*
-										function show(){
-
-												var instance = new Notification(
-																"NOTIFICATION",{
-																		body: "NEED TO WORKOUT",
-																		icon: strIcon
-												});       
-												instance.onclick = function () {
-														//alert('onclick in show');
-														document.location='list.html';
-												};
-												instance.onerror = function () {  
-														alert("notification not working");
-												};
-												instance.onshow = function () {
-												};
-												instance.onclose = function () {
-														alert("NEED TO WORKOUT! DONT HIDE!")
-												};
-												setTimeout(instance.remove(), 5000);
-														return false;
-										}                
-
-
-
-			*/
-
-
-// Once the service worker is registered set the initial state  
+				

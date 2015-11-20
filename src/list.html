@@ -12,6 +12,7 @@
     <script src="../js/jquery.js"></script>
     <script src="../js/not.js"></script>
     <script src="../js/log.js"></script>
+		<script src="../js/add.js"></script>
 
 </head>
 <body>
@@ -356,7 +357,34 @@
                             pausePlayHabit(document.getElementById('img'+habitKey));
                         }
                 }
-            });
+							
+									
+						  });
+					
+					/*
+								dataIcon = data.iconId;
+								dataName = data.name;
+								
+							
+					
+								const HR = 3600000;
+								const MIN = 60000;
+								var date = new Date();
+								var current_time = date.getTime();
+								var start_time = snapshot.val().habitData.timestamp;
+								var time_diff = (current_time - start_time) / 60000;
+								var hour = snapshot.val().habitData.notiTime.notiHour;
+								var mins = snapshot.val().habitData.notiTime.notiMins;
+								var interval = ((HR * hour) + (MIN * mins)) / 60000;
+								var refData = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/'+ habitKey+'/');
+								if ((time_diff % interval) < 1){
+									alert("IN");
+									createNotification(string, data);
+								}
+                	
+							*/
+							
+          
 
             //Makes slider go right
             $(document).on('click', '.habit-op', function(event){
