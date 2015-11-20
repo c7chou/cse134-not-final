@@ -187,6 +187,22 @@ body {
 	cursor: pointer;
 }
 
+.overlay .cancel{
+  width:100%;
+  text-align: center;
+  padding-top: 15px;
+  color: blue;
+}
+
+.overlay .cancel u{
+  width: 100%;
+}
+
+.overlay .cancel:hover {
+	opacity: 0.75;
+	cursor: pointer;
+}
+
 #overlay {
      visibility: hidden;
      position: absolute;
