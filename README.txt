@@ -10,15 +10,17 @@ Whenever a habit is created, it will appears on the notification page with a def
 
 
 Chia-yu: 
-implemented the notification page without database usage. 
-Added the notification interval bar on add.html and validation check of the input for the notification interval bar. 
-	implement the database retrieval of the notification time interval on edit.html.
-Wrote the Javascript funtions of all the controls of the toggle on the setting.html in setting.js 
-Worked with William as a small team to develop the timer for notification and implement functionalities of notification on not.js and notification.html
-Implemented the web notification pop up and the allow notification message request pop ups when website is opened but not being viewed at the moment.
-Tried implement notification through using the serviceWorkerRegistration to have messages pop up without opening the website. 
-	I have most of the codes for that down from doing lots of amount of researching; however, this implementation requires a server and a working HTTPS, which is really unfortunate.
-Had implemented a bar that explains to the user if they want to turn on the notifications but merging made it disappeared. 
+- implemented the notification page without database usage. 
+- Added the notification interval bar on add.html and validation check of the input for the notification interval bar. 
+	 - implement the database retrieval of the notification time interval on edit.html.
+- Wrote the Javascript funtions of all the controls of the toggle on the setting.html in setting.js 
+- Worked with William as a small team to develop the timer for notification and implement functionalities of notification on not.js and notification.html
+- Implemented the web notification pop up and the allow notification message request pop ups when website is opened but not being viewed at the moment.
+- Tried implement notification through using the serviceWorkerRegistration to have messages pop up without opening the website. 
+	- I have most of the codes for that down from doing lots of amount of researching; however, this implementation requires a server and a working HTTPS, which is really unfortunate.
+- Had implemented a bar that explains to the user if they want to turn on the notifications but merging made it disappeared. 
+- README  
+	- notification section
 
 
 
