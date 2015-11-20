@@ -88,6 +88,7 @@
 
 
             var habitProgressRef = myDataRef.child(habitKey + '/habitData/habitProgress/');
+			var habitFrequencyRef = myDataRef.child(habitKey + '/habitData/frequencyPerDay/');
 
             habitProgressRef.transaction(function(currentData)
             {
@@ -244,7 +245,7 @@
           editHabit(this);
         }
 
-        function displayHabit(name, text, key, iconId, habitProgress) {
+        function displayHabit(name, text, key, iconId, habitProgress, frequencyPerDay) {
 
             $('#habit-list').append(
 
@@ -261,7 +262,7 @@
                             '<line x1=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y1=\"0\" x2=\"'+150+'\" y2=\"0\" style=\"stroke:rgba(171,171,171,0.6);stroke-width:25\" />' +
                         '</svg>' +
                     '</span><br>' +
-                    '<span class=\"message-today\">Completed <strong>1/2</strong> for today!</span>' +
+                    '<span class=\"message-today\">Completed <strong>1/'+frequencyPerDay+'</strong> for today!</span>' +
                 '</div>' +
                 '<div class=\"habit-op\">' +
                     '<button  type=\"button\" class=\"op op-done\" onclick=\"showMsg(this);\" title=\"done\">' +
@@ -345,7 +346,7 @@
                 //alert(data.settings.turnoff);
                 if(data.settings.turnoff === '0')
                 {
-                    displayHabit(data.name, data.text, habitKey, data.iconId, data.habitProgress);
+                    displayHabit(data.name, data.text, habitKey, data.iconId, data.habitProgress, data.frequencyPerDay);
 
                     //alert(data.settings.pause);
                     if(data.settings.pause === '1' )
