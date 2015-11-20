@@ -253,7 +253,7 @@
             '<li class=\"slider\" id=\"'+ key +'\">' +
                 '<ul class=\"habit-info\">'+
                     '<li><div class=\"habit-name\">'+name+'</div></li>' +
-                    '<li><img class=\"habit-icon\" src=\"../img/'+iconId+'\" alt=\"habit icon\"></li>'+
+                    '<li><img class=\"habit-icon\" src=\"'+iconId+'\" alt=\"habit icon\"></li>'+
                 '</ul>' +
                 '<div class=\"message\">' +
                     '<span class=\"message-total\">' +
@@ -286,39 +286,6 @@
             //alert(JSON.stringify($('#'+key)));
             //return $('#'+key);
         };
-
-        /*
-
-        function displayPausedHabit(name, text, key, iconId, habitProgress) {
-
-            $('#habit-list').append(
-
-
-                <li class="slider" id="-K2tkyfzJG4mIHL9W7jz" style="opacity: 0.5; left: 0px;">
-   <ul class="habit-info">
-      <li>
-         <div class="habit-name">Lift Weights</div>
-      </li>
-      <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
-   </ul>
-   <div class="message">
-      <span class="message-total">
-         <strong>48</strong> days in a row! Best Record: <strong>60</strong><br>
-         <svg height="25" width="150">
-            <line x1="0" y1="0" x2="150" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25"></line>
-            <line x1="150" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25"></line>
-         </svg>
-      </span>
-      <br><span class="message-today">Completed <strong>1/2</strong> for today!</span>
-   </div>
-   <div class="habit-op"><button type="button" class="op op-done" onclick="showMsg(this);" title="done" disabled="true"><img src="../img/done.svg" alt="Done"></button><button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit" disabled="true"><img src="../img/edit.svg" alt="Edit"></button><button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit" disabled="true"><img src="../img/delete.svg" alt="Del"></button></div>
-   <div class="pause" style="position: relative; left: 545px; bottom: 50px; display: none;"><img id="img-K2tkyfzJG4mIHL9W7jz" style="position:absolute; top: -60px;" src="../img/play.png" alt="Pause" height="150" width="150" onclick="pausePlayHabit(this);"></div>
-</li>
-
-            );
-        };
-
-        */
 
 
         $(document).ready(function() {

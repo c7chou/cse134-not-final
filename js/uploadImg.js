@@ -1,5 +1,6 @@
 var spinner = new Spinner({color: '#ddd'});
 var firebaseRef = 'https://jjb750uy9yj.firebaseio-demo.com/';
+var selectedIcon = 'sleep.jpg';//start with add-icon picture, by default
 
 function handleFileSelect(evt) {
   var f = evt.target.files[0];
@@ -12,12 +13,16 @@ function handleFileSelect(evt) {
       var f = new Firebase(firebaseRef + 'images/' + hash + '/filePayload');
       spinner.spin(document.getElementById('spin'));
       // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
+
+		//alert(JSON.stringify(filePayload));
+		//f.set(filePayload);
+		//selectImage('icon4');
       f.set(filePayload, function() { 
         spinner.stop();
           
           //shows image
-          alert(document.getElementById("icon4").src);
         document.getElementById("icon4").src = e.target.result;
+		  selectedIcon = e.target.result;
           //alert(document.getElementById("pano").src); //copy link to img tag src attributes to access the img
         $('#file-upload').hide();
         // Update the location bar so the URL can be shared with others

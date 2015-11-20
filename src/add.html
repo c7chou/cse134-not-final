@@ -47,11 +47,11 @@
     <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
 
 
-    <p id="daily_freq"><label><i style="display:none" id="daily_ex" class="fa fa-exclamation"></i><a id="daily_oops" style="display:none">Only choose 1 Option!</a>Daily Frequency</label></p>
+    <p><label>Daily Frequency</label></p>
     <div id="daily-button">
-        <label> <input type="checkbox" name="frequencyPerDay" value="1"><span>1</span></label>
-        <label> <input type="checkbox" name="frequencyPerDay" value="2"><span>2</span></label>
-        <label> <input type="checkbox" name="frequencyPerDay" value="3"><span>3</span></label>
+        <label> <input type="radiobox" name="frequencyPerDay" value="1"><span>1</span></label>
+        <label> <input type="radiobox" name="frequencyPerDay" value="2"><span>2</span></label>
+        <label> <input type="radiobox" name="frequencyPerDay" value="3"><span>3</span></label>
         <span id="times">times</span>
     </div>
     <p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
@@ -87,13 +87,15 @@
 
   /***Global Variables***/
   var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
-  var selectedIcon = 'sleep.jpg';//start with add-icon picture, by default
+	var uploadImageFlag = 0;
 
   function selectImage(name) {
     //Clear all the other effects
     document.getElementById('icon1').style.border = "none";
     document.getElementById('icon2').style.border = "none";
     document.getElementById('icon3').style.border = "none";
+	document.getElementById('icon4').style.border = "none";
+	uploadImageFlag = 0;
     var image = document.getElementById(name);
     image.style.border = "5px solid #42A5F5";
 
@@ -107,6 +109,8 @@
     function uploadImage()
     {
         $('#file-upload').trigger('click');
+		uploadImageFlag = 1;
+		
         //document.getElementById("icon4").src = e.target.result;
         //alert("wokred");
     }
@@ -158,6 +162,15 @@
     var habitNameInput = document.getElementById('title').value;
     var habitOtherInput = document.getElementById('others').value;      
     habitOtherInput = Number(habitOtherInput);
+	  
+	if(uploadImageFlag)
+		{
+			selectedIcon = document.getElementById('icon4').src;
+		}
+	  else
+	  {
+		  selectedIcon = '../img/' + selectedIcon;
+	  }
       
     /* notification variable */ 
 

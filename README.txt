@@ -88,7 +88,5 @@ Bar Progress Bar
                 a. Logic for this would be to check timestamp of last updated and compare with current submission
                     Most practical approach.
 
-Draggables?
-Archives?
 
 
