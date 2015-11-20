@@ -7,11 +7,12 @@
 
         //doing the math and if time then send the alert
         function timeToNotify(){
-          var date = new Date();
-          var hour = date.getHours();
-          var min = date.getMinutes();
-
-
+          window.location = 'notification.html';
+          // var date = new Date();
+          // var hour = date.getHours();
+          // var min = date.getMinutes();
+          //
+          //
 
           /*var el = document.getElementById("not");
           if (Number(hour) >= hourToCheck)
@@ -50,11 +51,13 @@
             el.style.display = 'none';
         }
 
-        function list(child){
-          window.location = '../src/list.html';
+        function list(key){
+          key.remove();
+
+          /*window.location = '../src/list.html';
 
           var parent = child.parentNode;
-          parent.removeChild(child);
+          parent.removeChild(child);*/
           window.location = '../src/list.html';
         }
 
