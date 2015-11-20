@@ -1,8 +1,37 @@
 http://c7chou.github.io/CSE-134-HW3
 
 
-Notes:
 
+
+
+
+
+
+Oscar:
+Greatly assisted my team with development and debugging issues.
+Managed and assigned tasks to team
+Did a great portion of planning for the application, including UI and implementation
+Implemented all of the CRUD features including:
+    1. Add habits, read habits, delete habits, Update habits
+    2. Settings page add settings elements
+    
+Implemented Settings page pause, sleep, and turnoff javascript that interacts with DB
+Implemented features that pause of turnoff a habit in the main list
+Debugged and fixed sliding effects in the mainlist and added play and pause picture (previous buttons not compatible with the UI look)
+Greatly assisted with the navbar in the bottom
+Connected progress bar with the backend in the DB
+Added security in input boxes that prevent injections in the add and edit page.
+Added the security popup that prevents user from entering inappropriate input to input boxes
+Implemented all the DB connections of the edit page that interact with the back end and affect the main list.
+Added the upload a photo feature including:
+    1. photo storage in the backend
+    2. photo input selection
+Added the appropriate redirects to most pages
+I made routing information possible from page to page using URL parameters
+README
+
+
+Notes:
 
 Settings page to DB:
 
