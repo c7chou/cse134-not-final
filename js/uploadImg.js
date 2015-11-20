@@ -12,12 +12,10 @@ function handleFileSelect(evt) {
       var f = new Firebase(firebaseRef + 'images/' + hash + '/filePayload');
       spinner.spin(document.getElementById('spin'));
       // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
-        alert('step 1');
       f.set(filePayload, function() { 
         spinner.stop();
           
           //shows image
-          alert("hello");
           alert(document.getElementById("icon4").src);
         document.getElementById("icon4").src = e.target.result;
           //alert(document.getElementById("pano").src); //copy link to img tag src attributes to access the img
@@ -25,9 +23,7 @@ function handleFileSelect(evt) {
         // Update the location bar so the URL can be shared with others
         window.location.hash = hash;
       });
-        alert('step2');
     };
-      alert('step3');
   })(f);
   reader.readAsDataURL(f);
 }
