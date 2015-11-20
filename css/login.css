@@ -101,6 +101,8 @@ body {
 }
 
 .login .loginForm p {
+	margin: 0;
+	font-size: 1em;
 	display: none;
 	text-align: center;
 	color: #333;
@@ -160,16 +162,29 @@ body {
   box-sizing: border-box;
 }
 
+.signInMessage {
+	margin: 0;
+	font-size: 1em;
+}
 
+.resendMessage {
+	margin: 0;
+	font-size: 1em;
+}
 
 .login .forgotPassword{
   width:100%;
   text-align: center;
-  padding: 5px;
+  padding-top: 15px;
 }
 
 .login .forgotPassword u{
   width: 100%;
+}
+
+.login .forgotPassword:hover {
+	opacity: 0.75;
+	cursor: pointer;
 }
 
 #overlay {
@@ -194,15 +209,6 @@ body {
 	margin: 0 auto;
 	top: 15%;
 	width: 500px;
- /*    width:500px;
-     position: fixed;
-     top: 30%;
-     left: 30%;
-     margin: 0 auto;
-     background-color: #fff;
-     border:1px solid #000;
-     padding:15px;
-     text-align:center;*/
      z-index: 1000;
 }
 
@@ -317,22 +323,23 @@ body {
 
 .forgotOverlay {
     visibility: hidden;
-     width:500px;
-     position: fixed;
-     top: 30%;
-     left: 30%;
-     margin: 0 auto;
-     background-color: #fff;
-     border:1px solid #000;
-     padding:15px;
-     text-align:center;
-     z-index: 1000;
+	position: relative;
+	margin: 0 auto;
+	margin-top: -368px;
+	top: 15%;
+	width: 500px;
+    z-index: 1000;
 }
 
-.forgotOverlay .h3{
-  font-size: 3.5em;
+.forgotOverlay .forgotBanner{
+  font-size: 2.5;
   text-align: center;
-  color: #808080;
+  color: red;
+  width: auto;
+	background-color: white;
+  -webkit-border-radius: 5px; /*For Safari, etc. */
+  -moz-border-radius: 5px; /* For Mozilla, etc. */
+  border-radius: 5px; /* CSS3 Feature */
 }
 
 .forgotOverlay .loginForm {
@@ -448,6 +455,7 @@ body {
   .forgotOverlay {
   	width: auto;
   	margin: 0 20px;
+	margin-top: -368px;
   }
 }
 
