@@ -32,23 +32,6 @@ body {
   transform: translate(-50%, -75%); */
 }
 
-@media (max-width: 450px) {
-  .login {
-  	width: auto;
-  	margin: 0 20px;
-  }
-  
-  .signUpOverlay {
-  	width: auto;
-  	margin: 0 20px;
-  }
-  
-  .forgotOverlay {
-  	width: auto;
-  	margin: 0 20px;
-  }
-}
-
 .login h1 {
   font-size: 3.5em;
   text-align: center;
@@ -177,47 +160,7 @@ body {
   box-sizing: border-box;
 }
 
-@media (max-width: 380px) {
-  .login {
-    top: 7%;
-  }
 
-  .login .loginForm .loginButton {
-    width: 48%;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  .login .loginForm .signUpButton {
-    width: 48%;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  .signUpOverlay {
-    top: 7%;
-  }
-
-  .signUpOverlay .loginForm .signUpButton {
-    width: 48%;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  .forgotOverlay{
-    top: 7%;
-  }
-  
-  .forgotOverlay .loginForm .forgotButton {
-    width: 48%;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-}
-
-.login .loginForm .signUpButton:hover {
-	opacity: 0.75;
-	cursor: pointer;
-}
 
 .login .forgotPassword{
   width:100%;
@@ -268,7 +211,7 @@ body {
   font-size: 2.5;
   text-align: center;
   color: green;
-  width: 500px;
+  width: auto;
 	background-color: white;
   -webkit-border-radius: 5px; /*For Safari, etc. */
   -moz-border-radius: 5px; /* For Mozilla, etc. */
@@ -478,6 +421,74 @@ body {
 }
 
 .overlay .forgotOverlay .loginForm .forgotButton:hover {
+	opacity: 0.75;
+	cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  .login {
+  	width: auto;
+  	margin: 0 20px;
+  }
+  
+  .overlay{
+	  width: auto;
+  }
+  
+  .signUpBanner {
+  	width: auto;
+  	margin: 0 20px;
+  }
+  
+  .signUpOverlay {
+  	width: auto;
+  	margin: 0 20px;
+  }
+  
+  .forgotOverlay {
+  	width: auto;
+  	margin: 0 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .login {
+    top: 7%;
+  }
+
+  .login .loginForm .loginButton {
+    width: 48%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .login .loginForm .signUpButton {
+    width: 48%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .signUpOverlay {
+    top: 7%;
+  }
+
+  .signUpOverlay .loginForm .signUpButton {
+    width: 48%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .forgotOverlay{
+    top: 7%;
+  }
+  
+  .forgotOverlay .loginForm .forgotButton {
+    width: 48%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.login .loginForm .signUpButton:hover {
 	opacity: 0.75;
 	cursor: pointer;
 }
