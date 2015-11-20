@@ -7,6 +7,7 @@
 
         //doing the math and if time then send the alert
         function timeToNotify(){
+          //habitupdateList
           window.location = 'notification.html';
           // var date = new Date();
           // var hour = date.getHours();
@@ -53,11 +54,9 @@
 
         function list(key){
           key.remove();
-
-          /*window.location = '../src/list.html';
-
-          var parent = child.parentNode;
-          parent.removeChild(child);*/
+          //habitupdate.update({'flag' : '0'});
+          //habitupdateList[key].update({'flag' : '0'});
+          //habitNotObject[key].update
           window.location = '../src/list.html';
         }
 

@@ -32,6 +32,7 @@
         var refData = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
         var habitNotList = [];
         var habitNotObject = {};
+				var habitupdateList = {};
         function addNotificationforHabit(habitKey, name)
         {
             $('#notification-list').append(
@@ -55,6 +56,11 @@
 								var interval = ((HR * hour) + (MIN * mins)) / 60000;
 								var data = snapshot.val().habitData;
                 var habitKey = snapshot.name();
+								refupdate = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/' +habitKey+'/');
+								habitupdate = refupdate.child('habitData');
+								habitupdateList[habitKey] = habitupdate;
+								var flag = snapshot.val().habitData.flag;
+
                 if(data.hasOwnProperty('name')){
                     name = data.name ? data.name : '';
                     if(name.trim().length > 0)
@@ -63,7 +69,7 @@
                             habitNotObject[habitKey] = name;
                         }
                 }
-								if ((time_diff % interval) < 1)
+								if (((time_diff % interval) < 1) && flag)
                 	addNotificationforHabit(habitKey, name);
             });
         });
