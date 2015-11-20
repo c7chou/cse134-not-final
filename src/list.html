@@ -258,10 +258,9 @@
                 '<div class=\"message\">' +
                     '<span class=\"message-total\">' +
                         '<strong>' + habitProgress['counter'] + '</strong> days in a row! Best Record: <strong>' + habitProgress['maxRecord'] + '</strong><br>' +
-                        '<svg height=\"25\" width=\"150\">' +
-                            '<line x1=\"0\" y1=\"0\" x2=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y2=\"0\" style=\"stroke:rgba(65, 131, 215, 0.8);stroke-width:25\" />' +
-                            '<line x1=\"'+((habitProgress['counter']/habitProgress['maxRecord']) * 150)+'\" y1=\"0\" x2=\"'+150+'\" y2=\"0\" style=\"stroke:rgba(171,171,171,0.6);stroke-width:25\" />' +
-                        '</svg>' +
+                        '<div height=\"25\" width=\"150\">' +
+						'<meter value=\"'+((habitProgress['counter']%frequencyPerDay)+1)+'\" max=\"'+frequencyPerDay+'\"> '+'</meter>'+
+                        '</div>' +
                     '</span><br>' +
                     '<span class=\"message-today\">Completed '+((habitProgress['counter']%frequencyPerDay)+1)+'/'+frequencyPerDay+'</strong> for today!</span>' +
                 '</div>' +
