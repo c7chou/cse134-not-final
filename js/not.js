@@ -2,21 +2,20 @@
         var hourToCheck = 9;
 
         //1 hour = 3.6e6 & 1 minute = 60000
-        var interval = 10000;
+        var interval = 60000;
         //var updateInterval = 30000;
 
         //doing the math and if time then send the alert
         function timeToNotify(){
-          var date = Date();
-          var hour = date.slice(16,18);
-          var el = document.getElementById("not");
-          if (Number(hour) >= hourToCheck)
-            el.style.display = 'block';
-        }
+          var date = new Date();
+          var hour = date.getHours();
+          var min = date.getMinutes();
 
-        //function to check which habits to display notifications for
-        function notToDisplay(){
-          
+
+
+          /*var el = document.getElementById("not");
+          if (Number(hour) >= hourToCheck)
+            el.style.display = 'block';*/
         }
 
         //used to reset the interval
@@ -51,10 +50,14 @@
             el.style.display = 'none';
         }
 
-        function list(){
+        function list(child){
+          window.location = '../src/list.html';
+
+          var parent = child.parentNode;
+          parent.removeChild(child);
           window.location = '../src/list.html';
         }
 
         //setting the interval
-        var inter = setInterval(timeToNotify, interval);
+        setInterval(timeToNotify, interval);
         //setInterval(updateInt, updateInterval);

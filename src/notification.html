@@ -36,7 +36,7 @@
         {
             $('#notification-list').append(
             '<li id=\"' + habitKey + '\">' +
-				'<ul class=\"notification-info\" onclick="list()">' +
+				'<ul class=\"notification-info\" onclick="list(child)">' +
             		'<li><div class=\"notification-name\">' + name + '</div></li>' +
 				'</ul>' +
 
@@ -60,6 +60,7 @@
                 addNotificationforHabit(habitKey, name);
             });
         });
+
     </script>
     <div id="button-box">
         <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
