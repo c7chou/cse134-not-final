@@ -115,8 +115,6 @@
                 }
             });
 
-            // TODO algorithm to determine how much the line should increase
-
 
             msgElement.style.visibility="visible";
         }
@@ -221,6 +219,22 @@
             var habitId = element.parentNode.parentNode.id;
             document.location='edit.html?' + habitId;
         }
+        
+        // missed a day button clicked
+        function missedADay(element){
+            // MAYBE ADD confirmation box?
+            var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
+            var values = (msgElement.getElementsByTagName("strong"));
+            
+            var habitKey = element.parentElement.parentElement.id;
+            var habitProgressRef = myDataRef.child(habitKey + '/habitData/habitProgress/');
+            habitProgressRef.transaction(function(currentData){
+                habitProgressRef.update({ counter: 0});
+            });
+            
+            values[0].innerHTML = 0;
+            // CHANGE PROGRESS BAR
+        }
 
         function deleteOverlay() {
         	var el = document.getElementById("deleteOverlay");
@@ -273,6 +287,9 @@
                     '</button>' +
                     '<button type=\"button\" class=\"op op-del\" onclick=\"child = getChild(this); deleteOverlay()\" title=\"delete habit\">' +
                         '<img src=\"../img/delete.svg\" alt=\"Del\">' +
+                    '</button>' +
+                    '<button type=\"button\" class=\"op op-missed\" onclick=\"missedADay(this)\" title=\"Missed a day\">' +
+                        '<img src=\"../img/cross.svg\" alt=\"Cross\">' +
                     '</button>' +
                 '</div>' +
                 '<div class=\"pause\" style=\"position:relative;left:545px;bottom:50px;display:none\">' +
