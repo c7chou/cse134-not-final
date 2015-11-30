@@ -76,7 +76,7 @@
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
 
             var values = (msgElement.getElementsByTagName("strong"));
-            var lines = (msgElement.getElementsByTagName("line"));
+            var meter = (msgElement.getElementsByTagName("meter"));
 
 
 
@@ -105,8 +105,7 @@
                 if(currentData.maxRecord > currentData.counter){
                     // UPDATE the number of times done that day
                     // if(number of times == needed to be done a day, then update)
-                    lines[0].setAttribute("x2", (currentData.counter+1)/currentData.maxRecord*150);
-                    lines[1].setAttribute("x1", (currentData.counter+1)/currentData.maxRecord*150);
+                    meter[0].value +=1;
 
                     values[0].innerHTML = currentData.counter+1;
                     values[1].innerHTML = currentData.maxRecord;
@@ -225,6 +224,7 @@
             // MAYBE ADD confirmation box?
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             var values = (msgElement.getElementsByTagName("strong"));
+            var meter = (msgElement.getElementsByTagName("meter"));
             
             var habitKey = element.parentElement.parentElement.id;
             var habitProgressRef = myDataRef.child(habitKey + '/habitData/habitProgress/');
@@ -233,6 +233,7 @@
             });
             
             values[0].innerHTML = 0;
+            meter[0].value = 0;
             // CHANGE PROGRESS BAR
         }
 
