@@ -1,7 +1,7 @@
 /*style for the notifications */
         /* check how this looks on other browsers and then fix up all
          * these background setting statements
-         */
+         *
         .notification-message {
             background-color: #339bb9;
             background-repeat: repeat-x;
@@ -89,7 +89,7 @@
             margin-bottom: 0;
             margin: 0;
             padding: 0;
-        }
+        }*/
 
 /* basic structure & layout */
 html{height: 100%;}
@@ -434,6 +434,12 @@ meter{width: 250px}
         .notification-box{width: 350px; margin: 0 auto;}
         .habit-icon{width: 75px; height: 75px}
         meter{width: 150px}
+        .op-done{width: 40px; height: 40px}
+        .op-edit{width: 40px; height: 40px}
+        .op-del{width: 40px; height: 40px}
+        .op-missed{width: 40px; height: 40px}
+        .habit-op{top: 135px}
+        #habit-list>li{height: 200px}
 }
 
 /* desktop, tablet */
