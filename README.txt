@@ -15,14 +15,19 @@ Updated the code in order that the application looks better while in mobile brow
 MOBILE APPLICATIONS:
 Ran the code through phonegap so that it would export as a mobile application in iOS. The process worked but it changed the look of our application so that it wasn’t as good looking. We weren’t able to change the code so that the application would look as good as our Web application. 
 
-
 MINIFICATION:
-For the minification, we started by using grunt. After that we ultimately decided upon using Gulp in order for the minification of the code. 
+For the minification, we started by trying out both grunt and gulp. After that we ultimately decided upon using Gulp in order for the minification of the code. The commands for minifying those documents are stored in the gulpfile.js. The minification is run by typing "gulp <command>" in the terminal. 
 
 
 TEAM CONTRIBUTIONS:
 Chia-yu: 
-
+-implemented the build system platform Gulp so that minification of the css and javascript files are possible.
+-debugged and tested out every html files before and after minification. 
+-modified the code for notification so notifications is now working properly.
+-seperated js functions in notification.html and setting.js into different files.
+-updated the UI part of the edit.html to match that of the add.html (the part of updated frequency per day)
+-cleaned up duplicate code and tried to keep a good style on every files.
+-README
 
 William Kuntz:
 -add code and updated code for the Habit list so that it would be better for mobile users
