@@ -34,7 +34,10 @@ William Kuntz:
 
 
 Oscar:
-
+-Fixed bugs in edit screen between user interaction and the firebase DB
+-Likewise, fixed recurring bugs in add page between user interaction and the firebase DB
+-Implemented CRUD backend connection to Firebase for add, edit, and list habit pages and for setting page.
+-README
 
 Carlos:
 
