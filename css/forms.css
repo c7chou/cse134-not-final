@@ -15,7 +15,6 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  overflow: hidden;
 }
 p{
 	color:#6c6c6c;
@@ -121,6 +120,7 @@ img.icon{
 }
 
 h2{
+	margin: 0;
 	text-align:center;
 	background-color: #bdbdbd;
 	padding-top: 10px;
