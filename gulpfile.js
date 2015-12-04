@@ -6,14 +6,14 @@ var concat = require('gulp-concat');
 
 
 gulp.task('minify-css', function() {
-  return gulp.src('./concatCSS/all.css')
+  return gulp.src('./css/*.css')
     .pipe(minifyCss({compatibility: 'ie8', keepSpecialComments: 0}))
     .pipe(gulp.dest('distCSS'));
 });
 
 
 gulp.task('uglify', function(){
-	return gulp.src('./concatJS/all.js')
+	return gulp.src('./js/*.js')
 		.pipe(uglify())
 		.pipe(gulp.dest('./distJS'));
 })

@@ -1,15 +1,1 @@
-function logout_called(){
-	var el = document.getElementById("log");
-	el.style.display = 'block';
-}
-
-function logout_yes(){
-	var el = document.getElementById("log");
-	el.style.display = 'none';
-	window.location = '../src/login.html';
-}
-
-function logout_no(){
-	var el = document.getElementById("log");
-	el.style.display = 'none';
-}
+function logout_called(){var o=document.getElementById("log");o.style.display="block"}function logout_yes(){var o=document.getElementById("log");o.style.display="none",window.location="../src/login.html"}function logout_no(){var o=document.getElementById("log");o.style.display="none"}
