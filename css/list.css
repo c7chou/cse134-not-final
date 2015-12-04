@@ -1,7 +1,7 @@
 /*style for the notifications */
         /* check how this looks on other browsers and then fix up all
          * these background setting statements
-         */
+         *
         .notification-message {
             background-color: #339bb9;
             background-repeat: repeat-x;
@@ -89,13 +89,19 @@
             margin-bottom: 0;
             margin: 0;
             padding: 0;
-        }
+        }*/
 
 /* basic structure & layout */
-html{height: 100%;}
-h1{color:#888;text-align: center;}
+html{	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;}
+h1{margin: 0; color:#888;text-align: center;}
 body{
-    height:100%;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
     background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE) fixed; /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(bottom right,#BBDEFB, #B0C4DE) fixed; /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(bottom right, #BBDEFB, #B0C4DE) fixed; /* For Firefox 3.6 to 15 */
@@ -136,17 +142,23 @@ body{
 .op-del:hover{background:#F22613;}
 .op-del:active{background:#F22613; border:2px solid red;}
 
+/* add notification */
+#notifications_page{position:fixed; bottom: 20px; right:260px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
+#notifications_page:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
+#notifications_page:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#notifications_page:focus{outline-style:none;}
+
 /* add habit */
 #addHabit{position:fixed; bottom: 20px; right:180px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
 #addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
 
-/* add notification */
-#notification{position:fixed; bottom: 20px; right:100px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
-#notification:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
-#notification:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
-#notification:focus{outline-style:none;}
+/* add settings */
+#settings{position:fixed; bottom: 20px; right:100px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
+#settings:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
+#settings:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#settings:focus{outline-style:none;}
 
 /* entire container, keeps perspective */
 .flip-container {
@@ -418,12 +430,22 @@ body{
 	cursor: pointer;
 }
 
+meter{width: 250px}
+    
 /* phone */
 @media only screen
     and (max-width: 500px) {
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
         .notification-box{width: 350px; margin: 0 auto;}
+        .habit-icon{width: 75px; height: 75px}
+        meter{width: 150px}
+        .op-done{width: 40px; height: 40px}
+        .op-edit{width: 40px; height: 40px}
+        .op-del{width: 40px; height: 40px}
+        .op-missed{width: 40px; height: 40px}
+        .habit-op{top: 135px}
+        #habit-list>li{height: 200px}
 }
 
 /* desktop, tablet */

@@ -2,9 +2,8 @@
     z-position: 100; 
     position: fixed; 
     bottom: 0%; 
-    width: 100%; 
+    width: 110%; 
     margin: 0; 
-    margin-left: -8px; 
     padding: 0; 
     height: 100px;
     background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE) fixed; /* For Safari 5.1 to 6.0 */

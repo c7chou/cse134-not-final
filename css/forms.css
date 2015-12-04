@@ -15,11 +15,17 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 p{
 	color:#6c6c6c;
 	font-size: medium;
 }
+
+#noti_text{
+    color:#6c6c6c
+}
+
 div.forms {
 	position: relative;
 	margin: 0 auto;
@@ -101,6 +107,17 @@ img.icon{
 	font-size: small;
 	}
   
+    #times{
+    font-size: small;    
+    }
+    
+    #noti_text{
+    font-size: small;    
+    }
+    
+    .noti_hr_min{
+    font-size: small;
+    }
 }
 
 h2{
@@ -126,9 +143,11 @@ img.icon:hover{
 span#others_text{
 	padding-right: 5px;
 }
+
 .noti_hr_min{
 	color:#000;
 }
+
 p.notif{
 	display:inline;
 	font-size: small;

@@ -46,15 +46,17 @@
     </div>
     <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
 
-
     <p><label>Daily Frequency</label></p>
     <div id="daily-button">
         <label> <input type="radio" name="frequencyPerDay" value="1"><span>1</span></label>
         <label> <input type="radio" name="frequencyPerDay" value="2"><span>2</span></label>
         <label> <input type="radio" name="frequencyPerDay" value="3"><span>3</span></label>
-        <span id="times">times</span>
-    </div>
-    <p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
+		</div>
+    <p>
+        <label> <span> Daily Frequency:</span>
+            <input id="others" type="number" maxlength="2" placeholder="1">
+        </label>
+      </p>
 
     <input style="visibility: hidden;display: none;" class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
     <img class="pano" id="pano" />
