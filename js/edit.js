@@ -22,10 +22,11 @@
                     return query_string;
             }();
             
+			//getting ID of habit to retrieve data
             var habitId = window.location.search.substring(1);
             var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/'+habitId+'/');
             var selectedIcon;
-            
+			
 			function selectImage(name) {
 				//Clear all the other effects
 				document.getElementById('icon1').style.border = "none";
@@ -83,18 +84,9 @@
       '<span class=\"noti_hr_min\" id="hour_val">hours</span>'+
       '<input id=\"notificationMins\" type=\"number\" maxlength=\"2\" onchange=\"isNumberInMin(this)\" value=\"'+notiMin+'\" >'+
       '<span class=\"noti_hr_min\" id="min_val">minutes</span>'+
-    '</label></p></div>'+
-
-                  
-                  
-                  
-                  
-                    '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\" onClick="editOverlay()\"></p>'
-                  
-                  
-                             
+    '</label></p></div>'+     
+   '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\" onClick="editOverlay()\"></p>'    
                 );
-                
                 //Select Icon
                 document.getElementById(icons[iconId]).style.border="5px solid #42A5F5";
                 
@@ -159,7 +151,8 @@
 
                var notiHour = document.getElementById("notificationHours").value;
                var notiMin = document.getElementById("notificationMins").value;
-
+			   alert(notiHour);
+			   alert(notiMin);
                /*
                 * Notification check
                 */
@@ -240,6 +233,7 @@
                }
             });
             
+			var i = 0;
             $(document).ready(function() {
                 //fired upon child added to
                 myDataRef.on('child_added', function(snapshot) {
@@ -247,7 +241,9 @@
                     //data is returned as JSON array of all habit information
                     var data = snapshot.val();
                     selectedIcon = data.iconId;
-					alert(data.key());
+					//alert(JSON.stringify(data.habitData.notiTime));
+					//alert(JSON.stringify(data.notiTime));;
+					
                     //alert(JSON.stringify(data.daysOfWeek));
                     
                     var daysOfWeekStates= {};
@@ -263,12 +259,14 @@
                     //alert(JSON.stringify(daysOfWeekStates));
 					
 					//var notiRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/'+habitId+'/');
-					habitProgressRef.transaction(function(currentData)
-            		{
+					//habitProgressRef.transaction(function(currentData)
+            		//{
 						
-					});
-                    
-                    displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text, notificationTime.notiHour, data.notiTime.notiMins);
+					//if(data.habitData.notiTime != null)
+					//{
+					displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text, data.notiTime.notiHour, data.notiTime.notiMins);
+                    //displayHabit(data.habitData.name, data.habitData.iconId, daysOfWeekStates, data.habitData.frequencyPerDay, data.habitData.text, data.habitData.notiTime.notiHour, data.habitData.notiTime.notiMins);
+					//}
                 });
             });
             
