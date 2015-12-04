@@ -1,33 +1,43 @@
 ——Final Project - Homework 5——
 
+How to launch our website on mobile app:
+-http://docs.phonegap.com/getting-started/1-install-phonegap/desktop/ 
+-go to the link above and download either the desktop gui client for phonegap on your laptop
+-Then go to your app store of choice and download the phonegap developer app for your device.
+-Go through the website intsructions and create a new project on your laptop using either the desktop app or CLI.
+-Once you create the project and check that it is working on your phone, copy all of our project files into the www folder of the project directory.
+-Once you have all of the files and folders in the www subdirectory open an editing program and open the index.html file.
+-Phonegap uses the index file as its homebase and no matter what I tried I was unable to make it start with our login page.
+-Due to this you will need to add a button to take you to the right page.
+-<p class="event received">Device is Ready</p> under that line in the index.html file you will add this line of code:  <input class="loginButton" type="button" value="Start App" onclick="window.location.href = 'src/login.html'">
+-The button will lead to the login page where you can use the app as intended.
+-Once all of the code has been added, restart the phonegap app on your device and you should see the button on their.
+-Last and most important step,, Enjoy our app.
+
 AUTHENTICATION:
-We have the code for the authentication working but we were unable to get it to work together correctly. All of the methods are in the project but we didn’t have enough time to get them to work together nicely. 
+We have the code for the authentication working but we were unable to get it to work together correctly. All of the methods are in the project but we didn’t have enough time to get them to work together nicely. It will create a user profile and allow them to create a key but we were unable to authenticate them using the login on the login page. We suspect it might be because we were not using the proper data format to allow acces to the user and their uid.
 
 
 NOTIFICATIONS:
-Notifications are still not working completely properly for offline but it has the notifications from the previous assignment working
-
+Notifications are still not working completely properly for offline but it has the notifications from the previous assignment working.
+Once the habit reaches its notification interval it will place the user into the noptification page where the user can either click on the habit that activated the notification or go back to the list on their own. 
 
 MOBILE BROWSERS:
-Updated the code in order that the application looks better while in mobile browser views. This included changes for the HTML and CSS for the Habits List, for the notifications List, for the Add and for the Edit pages. This included changing the css and adding checks for a mobile view so that it will look better for users using a smaller browser window. 
+Updated the code in order that the application looks better while in mobile browser views. This included changes for the HTML and CSS for the Habits List, for the notifications List, for the Add and for the Edit pages. This included changing the css and adding checks for a mobile view so that it will look better for users using a smaller browser window. All of the pages will resize properly to the new width of the browser window and the icons will also change sizes to match the new window size to allow the best viewing of the webiste.
 
 
 MOBILE APPLICATIONS:
-Ran the code through phonegap so that it would export as a mobile application in iOS. The process worked but it changed the look of our application so that it wasn’t as good looking. We weren’t able to change the code so that the application would look as good as our Web application. 
+Ran the code through phonegap so that it would export as a mobile application in iOS. The process worked but it changed the look of our application so that it wasn’t as good looking. We weren’t able to change the code so that the application would look as good as our Web application. The app will look good for many of the phone sizes but we failed to implement some of the meta tags for viewport for the mobile application because we were running out of time and needed to focus on some of the other applications since they were giving us problems. The app will look fine of many of the newer phones due to their larger screen size but the iPhone 5 that we used for testing had a smaller width and height than we expected which caused the app to rely on scrolling which we didnt want and felt looked clunky.
+
 
 MINIFICATION:
-For the minification, we started by trying out both grunt and gulp. After that we ultimately decided upon using Gulp in order for the minification of the code. The commands for minifying those documents are stored in the gulpfile.js. The minification is run by typing "gulp <command>" in the terminal. 
+For the minification, we started by using grunt. After that we ultimately decided upon using Gulp in order for the minification of the code. All of the files are minimized using gulp and were left in their one line minimized form.
 
 
 TEAM CONTRIBUTIONS:
 Chia-yu: 
--implemented the build system platform Gulp so that minification of the css and javascript files are possible.
--debugged and tested out every html files before and after minification. 
--modified the code for notification so notifications is now working properly.
--seperated js functions in notification.html and setting.js into different files.
--updated the UI part of the edit.html to match that of the add.html (the part of updated frequency per day)
--cleaned up duplicate code and tried to keep a good style on every files.
--README
+-Worked on th minification of all of the files and set up both grunt and gulp for use on our account.
+
 
 William Kuntz:
 -add code and updated code for the Habit list so that it would be better for mobile users
@@ -39,14 +49,12 @@ William Kuntz:
 
 
 Oscar:
--Fixed bugs in edit screen between user interaction and the firebase DB
--Likewise, fixed recurring bugs in add page between user interaction and the firebase DB
--Implemented CRUD backend connection to Firebase for add, edit, and list habit pages and for setting page.
--Attempted to fix user authentication so that we could allow multi-user directory, however, I ran into multiple 
- problems that I couldn't fix in time.
--README
+
 
 Carlos:
+-Worked on the authentication for the login page. Implemented some of the autthorization code for firebase
+-Made asthetuic changes and cleaned up some of the bugs that I could find quickly on web view
+
 
 
 Stephen:
