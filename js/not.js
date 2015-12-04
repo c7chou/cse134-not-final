@@ -9,7 +9,7 @@ var interval = 60000;
 function timeToNotify(){
 	//habitupdateList
 	window.location = 'notification.html';
-
+}
 //used to go to the settings/notifications page
 function set(){
 		window.location = '../src/notification.html';
