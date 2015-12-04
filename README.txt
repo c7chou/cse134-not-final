@@ -54,7 +54,12 @@ William Kuntz:
 
 
 Oscar:
-
+-Fixed bugs in edit screen between user interaction and the firebase DB
+-Likewise, fixed recurring bugs in add page between user interaction and the firebase DB
+-Implemented CRUD backend connection to Firebase for add, edit, and list habit pages and for setting page.
+-Attempted to fix user authentication so that we could allow multi-user directory, however, I ran into multiple 
+ problems that I couldn't fix in time.
+-README
 
 Carlos:
 -Worked on the authentication for the login page. Implemented some of the autthorization code for firebase
