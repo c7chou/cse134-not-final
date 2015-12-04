@@ -1,3 +1,50 @@
+——Final Project - Homework 5——
+
+AUTHENTICATION:
+We have the code for the authentication working but we were unable to get it to work together correctly. All of the methods are in the project but we didn’t have enough time to get them to work together nicely. 
+
+
+NOTIFICATIONS:
+Notifications are still not working completely properly for offline but it has the notifications from the previous assignment working
+
+
+MOBILE BROWSERS:
+Updated the code in order that the application looks better while in mobile browser views. This included changes for the HTML and CSS for the Habits List, for the notifications List, for the Add and for the Edit pages. This included changing the css and adding checks for a mobile view so that it will look better for users using a smaller browser window. 
+
+
+MOBILE APPLICATIONS:
+Ran the code through phonegap so that it would export as a mobile application in iOS. The process worked but it changed the look of our application so that it wasn’t as good looking. We weren’t able to change the code so that the application would look as good as our Web application. 
+
+
+MINIFICATION:
+For the minification, we started by using grunt. After that we ultimately decided upon using Gulp in order for the minification of the code. 
+
+
+TEAM CONTRIBUTIONS:
+Chia-yu: 
+
+
+William Kuntz:
+-add code and updated code for the Habit list so that it would be better for mobile users
+-updated the code for the notifications page so that it would keep all of the information within the one line
+-updated the Add/Edit pages so that the writing matches the writing that was given to us in the starter code. 
+-fixed the Add/Edit pages so that it would look better for smaller window users. 
+-contributed to debug the notifications
+-README
+
+
+Oscar:
+
+
+Carlos:
+
+
+Stephen:
+
+
+
+
+——Homework 4——
 APPLICATION FUNCTIONALITY
 
 
