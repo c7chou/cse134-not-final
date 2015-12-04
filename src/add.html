@@ -14,7 +14,8 @@
   <script src="../js/firebase.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min.js"></script>
   <script src="../js/sha256.js"></script>
-  <script src="../js/uploadImg.js"></script>       
+  <script src="../js/uploadImg.js"></script> 
+	
 </head>
 <body onload="notifyMe()">
 <div class="log-box" id="log">     
@@ -46,17 +47,11 @@
     </div>
     <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
 
-    <p><label>Daily Frequency</label></p>
-    <div id="daily-button">
-        <label> <input type="radio" name="frequencyPerDay" value="1"><span>1</span></label>
-        <label> <input type="radio" name="frequencyPerDay" value="2"><span>2</span></label>
-        <label> <input type="radio" name="frequencyPerDay" value="3"><span>3</span></label>
-		</div>
-    <p>
-        <label> <span> Daily Frequency:</span>
-            <input id="others" type="number" maxlength="2" placeholder="1">
-        </label>
-      </p>
+		<p>
+			<label> <span> Daily Frequency:</span>
+				<input id="others" name="frequencyPerDay" type="number" maxlength="2" placeholder="1">
+			</label>
+		</p>
 
     <input style="visibility: hidden;display: none;" class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
     <img class="pano" id="pano" />
@@ -83,10 +78,7 @@
   </form>
 
 </div>
-
-  <script src="../js/addHabit.js"></script>
-  <script src="../js/add.js"></script>
-  
+  <script src="../js/add.js"></script> 
   <div id="button-box">
       <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
   </div> 
