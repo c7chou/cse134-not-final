@@ -71,27 +71,26 @@ $(document).ready(function()
 		refupdate = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/' +habitKey+'/');
 		habitupdate = refupdate.child('habitData');
 		habitupdateList[habitKey] = habitupdate;
-		var flag = snapshot.val().habitData.flag;
 		dataIcon = data.iconId;
 		dataName = data.name;
 		dataPause = data.settings.pause;
 		dataSleep = data.settings.sleep;
 		dataTurnoff = data.settings.turnoff;
 
-
-		if(data.hasOwnProperty('name')){
-				name = data.name ? data.name : '';
-				if(name.trim().length > 0)
-						{
-								habitNotList.push({key: habitKey, name: name});
-								habitNotObject[habitKey] = name;
-						}
-		}
-		if (((time_diff % interval) < 1) && flag){
+		if (((time_diff % interval) < 1)){
 			if((dataPause && dataSleep && dataTurnoff) == 0){
-				addNotificationforHabit(habitKey, name, dataIcon);
+				addNotificationforHabit(habitKey, dataName, dataIcon);
 				createNotification(dataName, dataIcon);
 			}
 		}
+		if(data.hasOwnProperty('name')){
+			name = data.name ? data.name : '';
+			if(name.trim().length > 0)
+				{
+					habitNotList.push({key: habitKey, name: name});
+					habitNotObject[habitKey] = name;
+			}
+		}
+		
 	});
 });
