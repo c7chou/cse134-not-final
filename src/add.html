@@ -47,14 +47,17 @@
     <input type="hidden" id="iconChosenFlag" name="imageId" value="default">
 
 
-    <p><label>Daily Frequency</label></p>
-    <div id="daily-button">
+    <p>
+        <label> <span> Daily Frequency:</span>
+ <!--   <div id="daily-button">
         <label> <input type="radiobox" name="frequencyPerDay" value="1"><span>1</span></label>
         <label> <input type="radiobox" name="frequencyPerDay" value="2"><span>2</span></label>
         <label> <input type="radiobox" name="frequencyPerDay" value="3"><span>3</span></label>
         <span id="times">times</span>
-    </div>
-    <p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
+    </div> -->
+            <input id="others" type="number" maxlength="2" placeholder="1">
+        </label>
+      </p>
 
     <input style="visibility: hidden;display: none;" class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
     <img class="pano" id="pano" />
@@ -157,7 +160,7 @@
         weekly_freq.style.color = 'red';
         return;
     }
-    var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
+  //  var frequencyPerDay = $('input[name=frequencyPerDay]:checked').val();
 
     var habitNameInput = document.getElementById('title').value;
     var habitOtherInput = document.getElementById('others').value;      
@@ -204,13 +207,13 @@
     /*
      * Daily Check
      */
-    if ((habitOtherInput != '') && (frequencyPerDay != undefined)){
+    /*if ((habitOtherInput != '') && (frequencyPerDay != undefined)){
                     daily_oops.style.display = 'block';
                     daily_oops.style.display = 'red';
                     daily_ex.style.display = 'block';
                     daily_freq.style.color = 'red';
                     return;
-                }
+                }*/
 
     if (habitOtherInput == '') {
       if (frequencyPerDay == undefined){
@@ -220,7 +223,7 @@
       }
     }
 
-    if ((frequencyPerDay == undefined) && (habitOtherInput < 1)){
+    /*if ((frequencyPerDay == undefined) && (habitOtherInput < 1)){
       daily_ex.style.display = 'block';
       daily_freq.style.color = 'red';
       return;
@@ -232,7 +235,7 @@
       return;
     }
        
-    if (frequencyPerDay == undefined)
+    if (frequencyPerDay == undefined)*/
       frequencyPerDay = habitOtherInput;
 
     var currentTime = Date.now();

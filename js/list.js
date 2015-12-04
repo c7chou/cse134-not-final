@@ -1,5 +1,5 @@
-/*******Global variables**************/
-//reference to firebase
+        /*******Global variables**************/
+        //reference to firebase
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
         var progressData;
 
@@ -34,23 +34,26 @@
             {
                 //alert(JSON.stringify(currentData));
                 var maxRecord = currentData.maxRecord;
-                if(currentData.maxRecord <= currentData.counter + 1)
+                // maxRecord needs update
+                if(currentData.maxRecord <= currentData.counter)
                 {
                     var maxRecord = parseInt(currentData.maxRecord, 10) + parseInt(1, 10);
-                }
-                habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
-                //alert(JSON.stringify(currentData));
-                // TODO TODO COMBINE THIS AND THE ABOVE IF STATEMENT
-                if(currentData.maxRecord > currentData.counter){
+                    habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
+                    meter[0].value +=1;
+
+                    values[0].innerHTML = currentData.counter+1;
+                    values[1].innerHTML = currentData.maxRecord+1;
+                }else{
                     // UPDATE the number of times done that day
                     // if(number of times == needed to be done a day, then update)
                     meter[0].value +=1;
 
                     values[0].innerHTML = currentData.counter+1;
                     values[1].innerHTML = currentData.maxRecord;
-                }else{
-                    // UPDATE MAX NUMBER
+                    habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10)});
                 }
+               // habitProgressRef.update({ counter: parseInt(currentData.counter, 10) + parseInt(1, 10) , maxRecord: maxRecord});
+                //alert(JSON.stringify(currentData));
             });
 
 
