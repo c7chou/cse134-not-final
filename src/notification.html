@@ -15,86 +15,22 @@
 </head>
 
 <body>
-    <div class="log-box" id="log">
-        <div class="log-message">
-            <button type="button" class="log-button" onclick="logout_no()">NO</button>
-            <button type="button" class="log-button" onclick="logout_yes()">YES</button>
-            <p>Are you sure you want to log out?</p>
-        </div>
-    </div>
+	<div class="log-box" id="log">
+		<div class="log-message">
+			<button type="button" class="log-button" onclick="logout_no()">NO</button>
+			<button type="button" class="log-button" onclick="logout_yes()">YES</button>
+			<p>Are you sure you want to log out?</p>
+		</div>
+		</div>
 	<section>
 		<h1>Notifications Page</h1>
 		<ul id="notification-list">
 		</ul>
 	</section>
-    <script>
-				const HR = 3600000;
-				const MIN = 60000;
-        var refData = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
-        var habitNotList = [];
-        var habitNotObject = {};
-				var habitupdateList = {};
-        function addNotificationforHabit(habitKey, name, Icon)
-        {
-            $('#notification-list').append(
-            '<li id=\"' + habitKey + '\" onclick=\"list(this)\">' +
-				'<ul class=\"notification-info\" >' +
-					//'<li></li>'+
-            		'<li style=\position: relative;"\"><img height=\"45px\" width=\"45px\" class=\"habit-icon\" src=\"'+Icon+'\" alt=\"habit icon\" style=\"position: relative; top: 3px;left: -15px;\"> <div class=\"notification-name\" style=\"position: relative; top: -15px;\">Please update habit: ' + name + '</div></li>' +
-				'</ul>' +
-
-			'</li>'
-            );
-        }
-        $(document).ready(function()
-        {
-            refData.on('child_added', function(snapshot){
-							
-							/** 
-							 notification 
-							 timing 
-							 */
-								var date = new Date();
-								var current_time = date.getTime();
-								var start_time = snapshot.val().habitData.timestamp;
-								var time_diff = (current_time - start_time) / 60000;
-								var hour = snapshot.val().habitData.notiTime.notiHour;
-								var mins = snapshot.val().habitData.notiTime.notiMins;
-								var interval = ((HR * hour) + (MIN * mins)) / 60000;
-								var data = snapshot.val().habitData;
-                var habitKey = snapshot.name();
-								refupdate = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/' +habitKey+'/');
-								habitupdate = refupdate.child('habitData');
-								habitupdateList[habitKey] = habitupdate;
-								var flag = snapshot.val().habitData.flag;
-								dataIcon = data.iconId;
-								dataName = data.name;
-								dataPause = data.settings.pause;
-								dataSleep = data.settings.sleep;
-								dataTurnoff = data.settings.turnoff;
-							
-
-                if(data.hasOwnProperty('name')){
-                    name = data.name ? data.name : '';
-                    if(name.trim().length > 0)
-                        {
-                            habitNotList.push({key: habitKey, name: name});
-                            habitNotObject[habitKey] = name;
-                        }
-                }
-								if (((time_diff % interval) < 1) && flag){
-									if((dataPause && dataSleep && dataTurnoff) == 0){
-                		addNotificationforHabit(habitKey, name, dataIcon);
-										createNotification(dataName, dataIcon);
-									}
-								}
-            });
-        });
-
-    </script>
-    <div id="button-box">
-        <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
-    </div>
-    <hr style="height:100px;border-width:0">
+   
+  <div id="button-box">
+		<button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
+	</div>
+	<hr style="height:100px;border-width:0">
 </body>
 </html>
