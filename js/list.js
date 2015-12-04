@@ -1,66 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Virtue / Vice</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../css/list.css">
-    <link rel="stylesheet" type="text/css" href="../css/box.css">
-    <link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/log.css">
-    <script src="../js/firebase.js"></script>
-    <script src="../js/jquery.js"></script>
-    <script src="../js/not.js"></script>
-    <script src="../js/log.js"></script>
-		<script src="../js/add.js"></script>
-
-</head>
-<body>
-  <!--  <div class="notification-box" id="not" onclick="set()">
-        <div class="notification-message">
-            <button type="button" class="close" onclick="end()">×</button>
-            <button type="button" class="settings" onclick="set()">
-                <i class="fa fa-list-ol"></i>
-            </button> 
-            <p>Come Check Back in on Your Habits!</p>
-        </div>
-    </div>-->
-    <div class="log-box" id="log">
-        <div class="log-message">
-            <button type="button" class="log-button" onclick="logout_no()">NO</button>
-            <button type="button" class="log-button" onclick="logout_yes()">YES</button>
-            <p>Are you sure you want to log out?</p>
-        </div>
-    </div>
-    <section>
-        <h1>Habit List</h1>
-        <ul id="habit-list">
-
-        </ul>
-    </section>
-
-    <div id="overlay" class="overlay">
-
-      <div id="deleteOverlay" class="deleteOverlay">
-        <h2>Are you sure?</h2>
-        <div class="buttons">
-          <input class="yesDeleteButton" type="button" value="Yes" onclick="deleteConfirmed(child)">
-          <input class="noDeleteButton" type="button" value="No" onclick="deleteOverlay()">
-        </div>
-      </div>
-
-      <div id="editOverlay" class="editOverlay">
-        <h2>Are you sure?</h2>
-        <div class="buttons">
-          <input class="yesEditButton" type="button" value="Yes" onclick="editConfirmed()">
-          <input class="noEditButton" type="button" value="No" onclick="editOverlay()">
-        </div>
-      </div>
-    </div>
-
-    <script type="text/javascript" src="../js/list.js">
-/*
-        //reference to firebase
+/*******Global variables**************/
+//reference to firebase
         var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/');
         var progressData;
 
@@ -120,7 +59,7 @@
 
         //Pauses the habit
         function pausePlayHabit(element){
-            // grab from database if it is play or pause. store as variable then check change play/pause
+            /* grab from database if it is play or pause. store as variable then check change play/pause */
             //alert(element.tagName);
             var thisList = (element.parentNode.parentNode);
             var habitElement = (thisList.getElementsByClassName("habit-op"))[0];
@@ -367,7 +306,6 @@
 								}
                 	
 							*/
-							/*
 							
           
 
@@ -392,17 +330,3 @@
                 }
             });
         });
-*/
-    </script>
-    <div id="button-box">
-        <button type="button" id="notifications_page" title="view notifications page" onclick="set()">!</button>
-        
-        <button type="button" id="settings" title="view settings" onclick="window.location = 'setting.html'"><i class="fa fa-cog"></i></button>
-
-        <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
-
-        <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
-    </div>
-    <hr style="height:100px;border-width:0">
-</body>
-</html>

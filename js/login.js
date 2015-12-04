@@ -1,3 +1,5 @@
+var ref = new Firebase("https://jjb750uy9yj.firebaseio-demo.com");
+
 function invalidPassword() {
   document.getElementById("signInMessage").innerHTML = "Password cannot be empty";
   var signUpText = document.getElementById("signInMessage");
@@ -67,8 +69,19 @@ function validatePassword(){
 	{
 		invalidPassword();
 	}
-	else
+	else{
+		ref.authWithPassword({
+		email    : document.getElementById("usermail").value,
+		password : document.getElementById("password").value
+		}, function(error, authData) {
+		if (error) {
+			console.log("Login Failed!", error);
+		} else {
+			console.log("Authenticated successfully with payload:", authData);
+		}
+		});
 		document.location.href = 'list.html';
+	}
 }
 
 function validateSignUpEmail() {
@@ -101,6 +114,25 @@ function validateForgotEmail() {
 
 function signUpConfirm(){
 //  onClickSignUp();
+  ref.createUser({
+  email: document.getElementById("signUpUsermail").value,
+  password: document.getElementById("newPassword").value
+}, function(error, userData) {
+  if (error) {
+    switch (error.code) {
+      case "EMAIL_TAKEN":
+        console.log("The new user account cannot be created because the email is already in use.");
+        break;
+      case "INVALID_EMAIL":
+        console.log("The specified email is not a valid email.");
+        break;
+      default:
+        console.log("Error creating user:", error);
+    }
+  } else {
+    console.log("Successfully created user account with uid:", userData.uid);
+  }
+});
   signUpOverlay();
   document.location.href = 'welcome.html';
 }
