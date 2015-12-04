@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Edit a habit</title>
-		<link rel="stylesheet" href="../css/forms.css">
-        <link rel="stylesheet" href="../css/log.css">
-        <link rel="stylesheet" href="../css/box.css">
-        <link rel="stylesheet" href="../css/font-awesome-4.4.0/css/font-awesome.min.css">
-        <script src="../js/log.js"></script>
-        <script src="../js/jquery.js"></script>
-        <script src="../js/firebase.js"></script>
-	</head>
-	<body>
-        <div class="log-box" id="log">
-            <div class="log-message">
-                <button type="button" class="log-button" onclick="logout_no()">NO</button>
-                <button type="button" class="log-button" onclick="logout_yes()">YES</button>
-                <p>Are you sure you want to log out?</p>
-            </div>
-        </div>
-        
-		<div class="forms">
-			<h2>Edit A Habit</h2>
-			<form id="edit-form">
-			</form>
-
-		</div>
-        
-		<div id="overlay" class="overlay">
-		  <div id="editOverlay" class="editOverlay">
-        <h3>Are you sure?</h3>
-        <div class="buttons">
-          <input id = "editConfirmed" class="yesEditButton" type="button" value="Yes">
-          <input class="noEditButton" type="button" value="No" onclick="editOverlay()">
-        </div>
-      </div>
-    </div>
-		
-		
-		<script>
-			 //Method splits URL and makes list of given paramaters and id values
+ //Method splits URL and makes list of given paramaters and id values
             var QueryString = function() {
                   // This function is anonymous, is executed immediately and
                   // the return value is assigned to QueryString!
@@ -64,11 +22,10 @@
                     return query_string;
             }();
             
-			//getting ID of habit to retrieve data
             var habitId = window.location.search.substring(1);
             var myDataRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/'+habitId+'/');
             var selectedIcon;
-			
+            
 			function selectImage(name) {
 				//Clear all the other effects
 				document.getElementById('icon1').style.border = "none";
@@ -126,9 +83,18 @@
       '<span class=\"noti_hr_min\" id="hour_val">hours</span>'+
       '<input id=\"notificationMins\" type=\"number\" maxlength=\"2\" onchange=\"isNumberInMin(this)\" value=\"'+notiMin+'\" >'+
       '<span class=\"noti_hr_min\" id="min_val">minutes</span>'+
-    '</label></p></div>'+     
-   '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\" onClick="editOverlay()\"></p>'    
+    '</label></p></div>'+
+
+                  
+                  
+                  
+                  
+                    '<p id=\"save_p\"><input id=\"save\" type=\"button\" value=\"Save It\" onClick="editOverlay()\"></p>'
+                  
+                  
+                             
                 );
+                
                 //Select Icon
                 document.getElementById(icons[iconId]).style.border="5px solid #42A5F5";
                 
@@ -193,8 +159,7 @@
 
                var notiHour = document.getElementById("notificationHours").value;
                var notiMin = document.getElementById("notificationMins").value;
-			   alert(notiHour);
-			   alert(notiMin);
+
                /*
                 * Notification check
                 */
@@ -275,7 +240,6 @@
                }
             });
             
-			var i = 0;
             $(document).ready(function() {
                 //fired upon child added to
                 myDataRef.on('child_added', function(snapshot) {
@@ -283,9 +247,7 @@
                     //data is returned as JSON array of all habit information
                     var data = snapshot.val();
                     selectedIcon = data.iconId;
-					//alert(JSON.stringify(data.habitData.notiTime));
-					//alert(JSON.stringify(data.notiTime));;
-					
+					alert(data.key());
                     //alert(JSON.stringify(data.daysOfWeek));
                     
                     var daysOfWeekStates= {};
@@ -301,14 +263,12 @@
                     //alert(JSON.stringify(daysOfWeekStates));
 					
 					//var notiRef = new Firebase('https://jjb750uy9yj.firebaseio-demo.com/habits/'+habitId+'/');
-					//habitProgressRef.transaction(function(currentData)
-            		//{
+					habitProgressRef.transaction(function(currentData)
+            		{
 						
-					//if(data.habitData.notiTime != null)
-					//{
-					displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text, data.notiTime.notiHour, data.notiTime.notiMins);
-                    //displayHabit(data.habitData.name, data.habitData.iconId, daysOfWeekStates, data.habitData.frequencyPerDay, data.habitData.text, data.habitData.notiTime.notiHour, data.habitData.notiTime.notiMins);
-					//}
+					});
+                    
+                    displayHabit(data.name, data.iconId, daysOfWeekStates, data.frequencyPerDay, data.text, notificationTime.notiHour, data.notiTime.notiMins);
                 });
             });
             
@@ -328,14 +288,3 @@
       if( input.value < 0) input.value = 0;
       if( input.value > 59) input.value = 59;
   }
-		
-		</script>
-		
-		
-		<!--<script src="../js/edit.js"></script>-->
-        <div id="button-box">
-            <button type="button" id="logout" onclick="logout_called()">LOGOUT</button>
-        </div>
-        <hr style="height:100px;border-width:0">
-	</body>
-</html>
