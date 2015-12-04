@@ -64,6 +64,7 @@ Oscar:
 Carlos:
 -Worked on the authentication for the login page. Implemented some of the autthorization code for firebase
 -Made asthetuic changes and cleaned up some of the bugs that I could find quickly on web view
+-Figured out the process to use phonegap to get our website in mobile app
 -README
 
 
